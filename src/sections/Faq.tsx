@@ -27,7 +27,7 @@ const FAQ: AccordionItem[] = [
 
 export default function Faq() {
   return (
-    <Section id="savol-javob" tone="paper" labelledBy="faq-title">
+    <Section id="savol-javob" tone="soft" labelledBy="faq-title">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <SectionHeading
           id="faq-title"

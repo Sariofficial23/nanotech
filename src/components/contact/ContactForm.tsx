@@ -63,7 +63,7 @@ export default function ContactForm() {
     errors[name] ? `${name}-error` : hint ? `${name}-hint` : undefined;
 
   return (
-    <div className="relative rounded-[1.75rem] bg-white p-6 text-ink shadow-[0_40px_100px_-40px_rgb(0_0_0/0.6)] sm:p-9">
+    <div className="relative rounded-[1.75rem] border border-white/10 bg-ink-soft p-6 text-white shadow-[0_40px_100px_-40px_rgb(255_196_0/0.25)] sm:p-9">
       <AnimatePresence mode="wait" initial={false}>
         {status.kind === 'success' ? (
           <motion.div
@@ -76,14 +76,14 @@ export default function ContactForm() {
             aria-live="polite"
             className="flex min-h-[26rem] flex-col items-center justify-center text-center"
           >
-            <span className="grid h-16 w-16 place-items-center rounded-full bg-brand">
+            <span className="grid h-16 w-16 place-items-center rounded-full bg-brand text-ink">
               <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
             </span>
             <h3 className="mt-6 font-display text-2xl font-semibold">So‘rovingiz yuborildi</h3>
-            <p className="mt-3 max-w-sm leading-relaxed text-muted">
+            <p className="mt-3 max-w-sm leading-relaxed text-white/65">
               Rahmat! So‘rovingiz qabul qilindi. Ko‘rib chiqilgach, siz bilan bog‘lanamiz.
             </p>
-            <Button variant="outline" className="mt-8" onClick={() => setStatus({ kind: 'idle' })}>
+            <Button variant="outline-light" className="mt-8" onClick={() => setStatus({ kind: 'idle' })}>
               Yana so‘rov yuborish
             </Button>
           </motion.div>
@@ -103,7 +103,7 @@ export default function ContactForm() {
               <h3 id="contact-form-title" className="font-display text-2xl font-semibold">
                 So‘rov qoldiring
               </h3>
-              <p className="mt-1.5 text-muted">Barcha maydonlar, izohdan tashqari, to‘ldirilishi shart.</p>
+              <p className="mt-1.5 text-white/55">Barcha maydonlar, izohdan tashqari, to‘ldirilishi shart.</p>
             </div>
 
             <Field id="name" label="Ism" error={errors.name?.message}>
@@ -147,18 +147,18 @@ export default function ContactForm() {
                   className={inputClasses(Boolean(errors.interest)) + ' h-12 appearance-none pr-11'}
                   {...register('interest')}
                 >
-                  <option value="" disabled>
+                  <option value="" disabled className="text-ink">
                     Tanlang
                   </option>
                   {INTERESTS.map((i) => (
-                    <option key={i.value} value={i.value}>
+                    <option key={i.value} value={i.value} className="text-ink">
                       {i.label}
                     </option>
                   ))}
                 </select>
                 <ChevronDown
                   aria-hidden="true"
-                  className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-ink/50"
+                  className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-white/50"
                 />
               </div>
             </Field>
@@ -189,7 +189,7 @@ export default function ContactForm() {
                   exit={{ opacity: 0, height: 0 }}
                   className="overflow-hidden"
                 >
-                  <div role="alert" className="flex gap-3 rounded-xl border border-danger/25 bg-danger/5 p-4 text-sm text-danger">
+                  <div role="alert" className="flex gap-3 rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-300">
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                     <p>
                       {ERROR_TEXT[status.reason]}

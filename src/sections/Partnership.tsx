@@ -52,17 +52,17 @@ export default function Partnership() {
             as="li"
             key={title}
             delay={0.08 * i}
-            className="group flex flex-col rounded-3xl border border-ink/10 bg-white p-7 shadow-card transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift sm:p-8"
+            className="group flex flex-col rounded-3xl border border-ink bg-ink p-7 text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-20px_rgb(17_17_17/0.6)] sm:p-8"
           >
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-brand">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand text-ink">
               <Icon className="h-5 w-5" aria-hidden="true" />
             </span>
             <h3 className="mt-6 font-display text-2xl font-semibold">{title}</h3>
-            <p className="mt-3 flex-1 leading-relaxed text-muted">{text}</p>
+            <p className="mt-3 flex-1 leading-relaxed text-white/65">{text}</p>
             <button
               type="button"
               onClick={() => requestContact(interest)}
-              className="mt-7 inline-flex items-center gap-2 self-start rounded-full text-sm font-semibold text-ink underline-offset-4 hover:underline"
+              className="mt-7 inline-flex items-center gap-2 self-start rounded-full text-sm font-semibold text-brand underline-offset-4 hover:underline"
             >
               Murojaat qilish
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />

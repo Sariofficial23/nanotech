@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import {
   AnimatePresence,
   motion,
-  motionValue,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
@@ -31,7 +30,7 @@ function Heading() {
 }
 
 /** Scroll-driven scene: the page scroll moves the cars in and out of the station. */
-function AnimatedStory() {
+function AnimatedStory({ zoom }: { zoom: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   // A light spring smooths out coarse mouse-wheel steps without lagging behind the scroll.
@@ -52,6 +51,7 @@ function AnimatedStory() {
         <div className="relative w-full max-w-6xl lg:w-[min(100%,calc((100svh-15rem)*1672/941))]">
           <StationScene
             progress={progress}
+            zoom={zoom}
             className="rounded-2xl border border-white/10 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.35)] sm:rounded-[1.75rem]"
           />
           <motion.div
@@ -90,30 +90,8 @@ function AnimatedStory() {
   );
 }
 
-const STATIC_STEPS = STORY_STEPS.map((s) => s.text);
-
-/** Reduced motion: one still frame (car at the pump) and the steps as a list. */
-function StaticStory() {
-  const [frame] = useState(() => motionValue(1));
-  return (
-    <section id="shoxobcha" aria-labelledby="story-title" className="bg-ink py-20 text-white sm:py-24">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
-        <Heading />
-        <StationScene progress={frame} className="rounded-2xl border border-white/10 sm:rounded-[1.75rem]" />
-        <ol className="grid gap-3 sm:grid-cols-2">
-          {STATIC_STEPS.map((text, i) => (
-            <li key={text} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-              <span className="font-display text-sm font-bold text-brand">{String(i + 1).padStart(2, '0')}</span>
-              {text}
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
 export default function ScrollStory() {
+  // Reduced motion keeps the scroll-driven crossfade (opacity only) but drops the zoom.
   const reduce = Boolean(useReducedMotion()) && !forceMotion();
-  return reduce ? <StaticStory /> : <AnimatedStory />;
+  return <AnimatedStory zoom={!reduce} />;
 }

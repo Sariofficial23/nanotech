@@ -56,7 +56,7 @@
   }
 
   body {
-    @apply bg-white font-sans text-ink antialiased;
+    @apply bg-ink font-sans text-white antialiased;
     font-feature-settings: 'cv11', 'ss01';
   }
 

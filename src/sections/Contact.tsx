@@ -12,7 +12,7 @@ function FormPlaceholder() {
     <div
       aria-busy="true"
       aria-label="Shakl yuklanmoqda"
-      className="min-h-[41rem] animate-pulse rounded-[1.75rem] bg-white/95 shadow-[0_40px_100px_-40px_rgb(0_0_0/0.6)]"
+      className="min-h-[41rem] animate-pulse rounded-[1.75rem] border border-white/10 bg-ink-soft"
     />
   );
 }

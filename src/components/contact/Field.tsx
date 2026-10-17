@@ -12,18 +12,18 @@ interface FieldProps {
 export default function Field({ id, label, optional, error, hint, children }: FieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 flex items-baseline justify-between text-sm font-semibold text-ink">
+      <label htmlFor={id} className="mb-2 flex items-baseline justify-between text-sm font-semibold text-white">
         {label}
-        {optional && <span className="text-xs font-normal text-muted">ixtiyoriy</span>}
+        {optional && <span className="text-xs font-normal text-white/45">ixtiyoriy</span>}
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} role="alert" className="mt-1.5 text-sm text-danger">
+        <p id={`${id}-error`} role="alert" className="mt-1.5 text-sm text-red-400">
           {error}
         </p>
       ) : (
         hint && (
-          <p id={`${id}-hint`} className="mt-1.5 text-sm text-muted">
+          <p id={`${id}-hint`} className="mt-1.5 text-sm text-white/45">
             {hint}
           </p>
         )

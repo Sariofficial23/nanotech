@@ -2,8 +2,8 @@ import { cn } from '../../lib/cn';
 
 export const inputClasses = (invalid: boolean) =>
   cn(
-    'block w-full rounded-xl border bg-white px-4 text-base text-ink placeholder:text-ink/35',
+    'block w-full rounded-xl border bg-white/[0.04] px-4 text-base text-white placeholder:text-white/35 [color-scheme:dark]',
     'transition-[border-color,box-shadow] duration-150 outline-none',
-    'focus:border-ink focus:ring-4 focus:ring-brand/40',
-    invalid ? 'border-danger focus:border-danger focus:ring-danger/15' : 'border-line hover:border-ink/30',
+    'focus:border-brand focus:ring-4 focus:ring-brand/20',
+    invalid ? 'border-red-400 focus:border-red-400 focus:ring-red-400/20' : 'border-white/15 hover:border-white/30',
   );
