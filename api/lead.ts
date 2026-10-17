@@ -5,7 +5,8 @@
 //   TELEGRAM_CHAT_ID   — chat/group id that receives leads (the bot must be a member)
 // Without them the function answers 503, and the form shows an error — never a fake success.
 
-import { interestLabel, leadSchema } from '../src/lib/leadSchema';
+// ESM on Vercel needs the explicit .js extension; TypeScript maps it to leadSchema.ts.
+import { interestLabel, leadSchema } from '../src/lib/leadSchema.js';
 
 const json = (status: number, body: Record<string, unknown>) =>
   Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
