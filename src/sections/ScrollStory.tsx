@@ -11,7 +11,7 @@ import {
 } from 'framer-motion';
 import { ChevronsDown } from 'lucide-react';
 import StationScene from '../components/story/StationScene';
-import { STORY, STORY_STEPS, stepAt } from '../components/story/storyTimeline';
+import { STORY_STEPS, stepAt } from '../components/story/storyTimeline';
 import { forceMotion } from '../lib/intro';
 
 const TITLE = 'Ixcham shoxobchada jarayon qanday ko‘rinadi?';
@@ -45,7 +45,7 @@ function AnimatedStory() {
   const bar = useTransform(progress, [0, 1], [0, 1]);
 
   return (
-    <section ref={ref} id="shoxobcha" aria-labelledby="story-title" className="relative h-[420svh] bg-ink text-white">
+    <section ref={ref} id="shoxobcha" aria-labelledby="story-title" className="relative h-[260svh] bg-ink text-white">
       <div className="sticky top-0 flex h-svh flex-col items-center justify-center gap-4 px-4 pt-20 pb-6 sm:gap-6 sm:px-6 lg:px-8">
         <Heading />
 
@@ -90,17 +90,17 @@ function AnimatedStory() {
   );
 }
 
-const STATIC_STEPS = ['Avtomobil shoxobchaga keladi', 'Yoqilg‘i quyiladi', 'Mijoz yo‘lida davom etadi'];
+const STATIC_STEPS = STORY_STEPS.map((s) => s.text);
 
 /** Reduced motion: one still frame (car at the pump) and the steps as a list. */
 function StaticStory() {
-  const [frame] = useState(() => motionValue((STORY.a.arrive + STORY.a.leave) / 2));
+  const [frame] = useState(() => motionValue(1));
   return (
     <section id="shoxobcha" aria-labelledby="story-title" className="bg-ink py-20 text-white sm:py-24">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
         <Heading />
         <StationScene progress={frame} className="rounded-2xl border border-white/10 sm:rounded-[1.75rem]" />
-        <ol className="grid gap-3 sm:grid-cols-3">
+        <ol className="grid gap-3 sm:grid-cols-2">
           {STATIC_STEPS.map((text, i) => (
             <li key={text} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
               <span className="font-display text-sm font-bold text-brand">{String(i + 1).padStart(2, '0')}</span>

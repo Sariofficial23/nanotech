@@ -9,8 +9,9 @@ import sharp from 'sharp';
 // Originals are matched by the time stamp in their file name (the rest of the name contains odd spaces).
 const SOURCES: { stamp: string; name: string }[] = [
   { stamp: '00_29_23', name: 'station-sunset' },
-  { stamp: '00_31_58', name: 'station-front' },
   { stamp: '00_34_24', name: 'station-highway' },
+  { stamp: '00_50_28', name: 'station-arrive' },
+  { stamp: '00_50_35', name: 'station-refuel' },
 ];
 
 const WIDTHS = [800, 1600];

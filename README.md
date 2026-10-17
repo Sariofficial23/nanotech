@@ -36,7 +36,7 @@ src/
   components/
     LogoAnimation/               logotip animatsiyasi (geometry.ts, timeline.ts)
     brand/                       BrandMark (belgi), Logo (belgi + yozuv)
-    story/                       scroll-sahna: StationScene, Car, carSpecs, storyTimeline
+    story/                       scroll-sahna: StationScene, storyTimeline
     layout/                      Header, Footer, IntroOverlay
     contact/                     ContactForm, ContactChannels, Field
     ui/                          Button, Section, Reveal, Accordion
@@ -90,9 +90,9 @@ Har bir `git push` dan keyin Vercel avtomatik yangi versiyani chiqaradi.
 
 - Stansiya rasmlari — vizualizatsiyalar (saytda shunday belgilangan). Asl PNG’lar repozitoriyda saqlanmaydi;
   yangilash: `npm run images -- "D:\nano tech"` → `public/images/*.avif|webp` va `public/og.jpg`.
-- “Ixcham shoxobchada jarayon qanday ko‘rinadi?” bo‘limi sahifa aylantirilganda ishlaydi: 1-avtomobil keladi,
-  yoqilg‘i quyadi, ketadi, keyin 2-avtomobil. Vaqt shkalasi — `components/story/storyTimeline.ts`,
-  mashinalar shakli — `carSpecs.ts`. `prefers-reduced-motion` da bitta statik kadr va qadamlar ro‘yxati ko‘rsatiladi.
+- “Ixcham shoxobchada jarayon qanday ko‘rinadi?” bo‘limi sahifa aylantirilganda ishlaydi: bir xil burchakdan
+  olingan ikki rasm (`station-arrive` → `station-refuel`) sekin yaqinlashish bilan bir-biriga o‘tadi.
+  Sozlamalar — `components/story/storyTimeline.ts`. `prefers-reduced-motion` da statik kadr ko‘rsatiladi.
 
 ## Logotip va intro
 
