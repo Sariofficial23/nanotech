@@ -10,6 +10,7 @@ import Faq from './sections/Faq';
 import Hero from './sections/Hero';
 import Partnership from './sections/Partnership';
 import Process from './sections/Process';
+import ScrollStory from './sections/ScrollStory';
 import Solutions from './sections/Solutions';
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
       <Header />
       <main id="asosiy">
         <Hero ready={!introOpen} />
+        <ScrollStory />
         <About />
         <Solutions />
         <Process />

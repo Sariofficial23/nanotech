@@ -26,16 +26,17 @@ npx vercel dev
 
 ```
 api/lead.ts                      Vercel Function: arizani tekshiradi va Telegram’ga yuboradi
-public/                          favicon.svg, robots.txt, brand/nanotex-logo-original.jpg
+public/                          favicon.svg, og.jpg, robots.txt, images/ (AVIF/WebP), brand/
 scripts/generate-favicon.ts      favicon.svg ni logotip geometriyasidan yaratadi (npm run favicon)
+scripts/optimize-images.ts       PNG vizualizatsiyalarni AVIF/WebP (800/1600) va og.jpg ga aylantiradi
 src/
   App.tsx, main.tsx, index.css   kirish nuqtasi, dizayn tokenlari (Tailwind @theme)
   config/site.ts                 brend nomi, menyu, rasmiy kontaktlar (env’dan)
-  sections/                      Hero, About, Solutions, Process, Partnership, Faq, Contact
+  sections/                      Hero, ScrollStory, About, Solutions, Process, Partnership, Faq, Contact
   components/
     LogoAnimation/               logotip animatsiyasi (geometry.ts, timeline.ts)
     brand/                       BrandMark (belgi), Logo (belgi + yozuv)
-    illustrations/               StationIllustration — konsept tasvir (SVG)
+    story/                       scroll-sahna: StationScene, Car, carSpecs, storyTimeline
     layout/                      Header, Footer, IntroOverlay
     contact/                     ContactForm, ContactChannels, Field
     ui/                          Button, Section, Reveal, Accordion
@@ -84,6 +85,14 @@ U `POST` JSON (`name, phone, interest, comment, website, page`) qabul qilib, `{"
 5. Domen ulansa: Settings → Domains. Keyin `VITE_SITE_URL` ni shu domenga o‘rnatib, qayta deploy qiling.
 
 Har bir `git push` dan keyin Vercel avtomatik yangi versiyani chiqaradi.
+
+## Rasmlar va scroll-sahna
+
+- Stansiya rasmlari — vizualizatsiyalar (saytda shunday belgilangan). Asl PNG’lar repozitoriyda saqlanmaydi;
+  yangilash: `npm run images -- "D:\nano tech"` → `public/images/*.avif|webp` va `public/og.jpg`.
+- “Ixcham shoxobchada jarayon qanday ko‘rinadi?” bo‘limi sahifa aylantirilganda ishlaydi: 1-avtomobil keladi,
+  yoqilg‘i quyadi, ketadi, keyin 2-avtomobil. Vaqt shkalasi — `components/story/storyTimeline.ts`,
+  mashinalar shakli — `carSpecs.ts`. `prefers-reduced-motion` da bitta statik kadr va qadamlar ro‘yxati ko‘rsatiladi.
 
 ## Logotip va intro
 

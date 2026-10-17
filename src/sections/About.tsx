@@ -1,5 +1,5 @@
 import { LandPlot, MapPinned, ScanSearch } from 'lucide-react';
-import StationIllustration from '../components/illustrations/StationIllustration';
+import Picture from '../components/ui/Picture';
 import Reveal from '../components/ui/Reveal';
 import { Section, SectionHeading } from '../components/ui/Section';
 
@@ -50,10 +50,15 @@ export default function About() {
 
         <Reveal delay={0.1} className="relative">
           <div aria-hidden="true" className="bg-grid-dark absolute -inset-6 -z-10 rounded-[2.5rem] [mask-image:radial-gradient(closest-side,black,transparent)]" />
-          <div className="overflow-hidden rounded-[2rem] border border-line bg-gradient-to-b from-brand-soft to-white p-4 shadow-card sm:p-6">
-            <StationIllustration variant="day" className="block h-auto w-full" title="Ixcham shoxobcha konsepti — kunduzgi ko‘rinish" />
+          <div className="overflow-hidden rounded-[2rem] border border-line bg-white p-2 shadow-card sm:p-3">
+            <Picture
+              name="station-highway"
+              alt="Avtomobil yo‘li bo‘yidagi NanoTech ixcham shoxobchasi (vizualizatsiya)"
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"
+            />
           </div>
-          <p className="mt-3 text-center text-xs text-muted">Konsept tasvir. Haqiqiy loyihalar ko‘rinishi farq qilishi mumkin.</p>
+          <p className="mt-3 text-center text-xs text-muted">Vizualizatsiya. Haqiqiy loyihalar ko‘rinishi farq qilishi mumkin.</p>
         </Reveal>
       </div>
     </Section>

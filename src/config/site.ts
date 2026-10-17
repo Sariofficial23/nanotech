@@ -20,7 +20,7 @@ export const NAV_ITEMS = [
   { id: 'aloqa', label: 'Aloqa' },
 ] as const;
 
-export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'jarayon' | 'savol-javob';
+export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'shoxobcha' | 'jarayon' | 'savol-javob';
 
 const phone = env(import.meta.env.VITE_CONTACT_PHONE);
 const telegram = env(import.meta.env.VITE_CONTACT_TELEGRAM)?.replace(/^@/, '') ?? null;

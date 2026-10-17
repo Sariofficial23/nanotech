@@ -23,7 +23,6 @@
   --animate-drift: drift 22s ease-in-out infinite alternate;
   --animate-drift-slow: drift 34s ease-in-out infinite alternate-reverse;
   --animate-grid: grid-pan 40s linear infinite;
-  --animate-sweep: sweep 7s ease-in-out infinite;
 
   @keyframes drift {
     from {
@@ -40,16 +39,6 @@
     }
     to {
       background-position: 64px 64px;
-    }
-  }
-
-  @keyframes sweep {
-    0%,
-    55% {
-      transform: translateX(-120%);
-    }
-    100% {
-      transform: translateX(220%);
     }
   }
 }

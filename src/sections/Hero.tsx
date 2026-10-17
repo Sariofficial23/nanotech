@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { ArrowDown, ArrowRight, MapPin, Route, Zap } from 'lucide-react';
 import { BRAND } from '../config/site';
 import { requestContact } from '../lib/contactIntent';
-import StationIllustration from '../components/illustrations/StationIllustration';
 import { Button, ButtonLink } from '../components/ui/Button';
+import Picture from '../components/ui/Picture';
 
 const HIGHLIGHTS = [
   { icon: Zap, label: 'Ixcham format' },
@@ -86,14 +86,16 @@ export default function Hero({ ready = true }: HeroProps) {
           transition={{ duration: 1, delay: 0.25, ease }}
           className="relative"
         >
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-3 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.35)] sm:p-5">
-            <StationIllustration
-              variant="night"
-              className="block h-auto w-full"
-              title="NanoTech ixcham yoqilg‘i quyish shoxobchasi konsepti"
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.35)] sm:p-3">
+            <Picture
+              name="station-sunset"
+              alt="NanoTech ixcham yoqilg‘i quyish shoxobchasi quyosh botishida (vizualizatsiya)"
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              priority
+              className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"
             />
           </div>
-          <p className="mt-3 text-center text-xs text-white/40">Konsept tasvir</p>
+          <p className="mt-3 text-center text-xs text-white/40">Vizualizatsiya</p>
         </motion.div>
       </div>
     </section>
