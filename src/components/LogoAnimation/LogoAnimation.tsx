@@ -1,72 +1,24 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useId, useRef, useState } from 'react';
-import { animate, frame, cancelFrame, motionValue, useReducedMotion } from 'framer-motion';
+import {
+  animate,
+  cancelFrame,
+  frame,
+  motionValue,
+  useReducedMotion,
+  type AnimationPlaybackControls,
+  type MotionValue,
+} from 'framer-motion';
 import { COLORS, DROPLET, GEAR, NOZZLE, STATION, VESSEL, VIEWBOX, WORDMARK, dropPath } from './geometry';
+import { FINAL, INITIAL, KEYS, LOGO_ANIMATION_DURATION, TIMELINE, type Key, type State } from './timeline';
 import './LogoAnimation.css';
 
 const ORIGINAL_SRC = `${import.meta.env.BASE_URL}brand/nanotex-logo-original.jpg`;
 
 const FONTS = ['italic 900 64px "Saira"', '600 16px "Barlow"', 'italic 800 16px "Montserrat"'];
 
-const EASE = {
-  out: [0.16, 1, 0.3, 1],
-  soft: [0.22, 1, 0.36, 1],
-  inOut: [0.65, 0, 0.35, 1],
-  draw: [0.45, 0, 0.2, 1],
-  // cubic-bezier(1/3, 0, 2/3, 1/3) is exactly y = t² — uniform acceleration from rest.
-  gravity: [1 / 3, 0, 2 / 3, 1 / 3],
-};
-
-const INITIAL = {
-  gearDraw: 0, gearRot: -35, gearScale: 0.86, gearFill: 0, disc: 0,
-  station: 0,
-  nozzleDraw: 0, nozzleFill: 0, vesselDraw: 0, tilt: 0,
-  dropForm: 0, dropFall: 0, impact: 0, liquid: 0,
-  mark: 0, nano: 0, tex: 0, line: 0,
-  slogan: 0, wings: 0,
-};
-
-const FINAL = Object.fromEntries(Object.keys(INITIAL).map((k) => [k, 1]));
-Object.assign(FINAL, { gearRot: 0, gearScale: 1, tilt: 0 });
-
-// [value, target | keyframes, { at, duration, ease, times }] — seconds.
-const TIMELINE = [
-  // 2. Gear: thin contour draws itself, assembles and settles with a small turn.
-  ['gearDraw', 1, { at: 0.15, duration: 0.8, ease: EASE.draw }],
-  ['gearRot', 0, { at: 0.1, duration: 1.15, ease: EASE.out }],
-  ['gearScale', 1, { at: 0.1, duration: 1.15, ease: EASE.out }],
-  ['gearFill', 1, { at: 0.6, duration: 0.35, ease: 'easeOut' }],
-  ['disc', 1, { at: 0.62, duration: 0.5, ease: EASE.soft }],
-  // The station enters while the contour reaches the bottom, so the gear's cropped edge is never seen bare.
-  ['station', 1, { at: 0.45, duration: 0.7, ease: EASE.out }],
-  // 3. Nozzle and drop pictogram appear inside the gear.
-  ['nozzleDraw', 1, { at: 1.0, duration: 0.5, ease: EASE.draw }],
-  ['vesselDraw', 1, { at: 1.12, duration: 0.45, ease: EASE.draw }],
-  ['nozzleFill', 1, { at: 1.3, duration: 0.3, ease: 'easeOut' }],
-  // 4. Nozzle dips, holds while the drop forms, then recoils once the weight is gone.
-  ['tilt', [0, NOZZLE.tilt, NOZZLE.tilt, -0.8, 0], {
-    at: 1.55, duration: 1.45, times: [0, 0.241, 0.586, 0.766, 1],
-    ease: ['easeInOut', 'linear', 'easeOut', 'easeInOut'],
-  }],
-  // 5. Drop forms, detaches, falls under gravity into the pictogram and fills it.
-  ['dropForm', 1, { at: 1.9, duration: 0.5, ease: 'linear' }],
-  ['dropFall', 1, { at: 2.4, duration: 0.3, ease: EASE.gravity }],
-  ['impact', 1, { at: 2.7, duration: 0.14, ease: 'easeOut' }],
-  ['liquid', 1, { at: 2.68, duration: 0.55, ease: EASE.soft }],
-  // 6. Company name rises out of a mask.
-  ['mark', 1, { at: 2.72, duration: 0.6, ease: EASE.out }],
-  ['nano', 1, { at: 2.76, duration: 0.7, ease: EASE.out }],
-  ['tex', 1, { at: 2.86, duration: 0.7, ease: EASE.out }],
-  ['line', 1, { at: 2.9, duration: 0.7, ease: EASE.inOut }],
-  // 7. Slogan last.
-  ['wings', 1, { at: 3.25, duration: 0.6, ease: EASE.inOut }],
-  ['slogan', 1, { at: 3.3, duration: 0.55, ease: EASE.soft }],
-];
-
-export const LOGO_ANIMATION_DURATION = Math.max(...TIMELINE.map(([, , o]) => o.at + o.duration));
-
-const lerp = (a, b, t) => a + (b - a) * t;
-const clamp01 = (t) => Math.min(1, Math.max(0, t));
-const easeOutQuad = (t) => 1 - (1 - t) * (1 - t);
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
+const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
 
 // Where the drop hangs: bottom of the spout tip, rotated by the full tilt.
 const DROP_X = (() => {
@@ -77,29 +29,31 @@ const DROP_X = (() => {
   return px + dx * Math.cos(a) - dy * Math.sin(a);
 })();
 
-function setDraw(el, progress) {
+type El = SVGElement | null | undefined;
+
+function setDraw(el: El, progress: number) {
   if (!el) return;
   el.style.strokeDashoffset = String(1 - progress);
   el.style.visibility = progress > 0 ? 'visible' : 'hidden';
 }
 
-function setOpacity(el, value) {
+function setOpacity(el: El, value: number) {
   if (el) el.style.opacity = String(value);
 }
 
-function setTransform(el, value) {
+function setTransform(el: El, value: string) {
   if (el) el.setAttribute('transform', value);
 }
 
 /** Droplet shape for the current state; null when it should not be drawn. */
-function dropletState({ dropForm: f, dropFall: p, impact: i }) {
+function dropletState({ dropForm: f, dropFall: p, impact: i }: State) {
   if (f <= 0 || i >= 1) return null;
   const R = DROPLET.r;
   const restLen = R * 1.05 + DROPLET.neck;
   const x = DROP_X;
-  let r;
-  let len;
-  let cy;
+  let r: number;
+  let len: number;
+  let cy: number;
   if (p <= 0) {
     // Volume grows linearly with time, so the radius grows with its cube root.
     r = R * Math.cbrt(f);
@@ -125,25 +79,45 @@ function dropletState({ dropForm: f, dropFall: p, impact: i }) {
   };
 }
 
-const LogoAnimation = forwardRef(function LogoAnimation(
+export interface LogoAnimationProps {
+  autoPlay?: boolean;
+  showControls?: boolean;
+  /** QA escape hatch only; real visitors with reduced motion get the static logo. */
+  forceMotion?: boolean;
+  onComplete?: () => void;
+  className?: string;
+}
+
+export interface LogoAnimationHandle {
+  replay: (opts?: { speed?: number }) => Promise<void>;
+  seek: (seconds: number) => void;
+  showFinal: () => void;
+}
+
+type ElName =
+  | 'gear' | 'gearContour' | 'gearRingContour' | 'gearBody' | 'disc' | 'station'
+  | 'nozzle' | 'nozzleBodyLine' | 'nozzleWindowLine' | 'nozzleSpout' | 'nozzleTail'
+  | 'nozzleFill' | 'nozzleSpoutCore' | 'nozzleTip' | 'vessel' | 'dropFront' | 'dropBack'
+  | 'liquidClip' | 'mark' | 'nano' | 'tex' | 'lineClip' | 'wingsClip' | 'slogan';
+
+const createValues = () =>
+  Object.fromEntries(KEYS.map((k) => [k, motionValue(INITIAL[k])])) as Record<Key, MotionValue<number>>;
+
+const LogoAnimation = forwardRef<LogoAnimationHandle, LogoAnimationProps>(function LogoAnimation(
   { autoPlay = true, showControls = false, forceMotion = false, onComplete, className = '' },
   ref,
 ) {
-  // forceMotion is a QA escape hatch only; real visitors with reduced motion get the static logo.
-  const reduceMotion = useReducedMotion() && !forceMotion;
+  const reduceMotion = Boolean(useReducedMotion()) && !forceMotion;
   const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
-  const id = (name) => `nt-${uid}-${name}`;
+  const id = (name: string) => `nt-${uid}-${name}`;
 
-  const els = useRef({});
-  const bind = (name) => (node) => {
+  const els = useRef<Partial<Record<ElName, SVGElement | null>>>({});
+  const bind = (name: ElName) => (node: SVGElement | null) => {
     els.current[name] = node;
   };
 
-  const valuesRef = useRef(null);
-  if (!valuesRef.current) {
-    valuesRef.current = Object.fromEntries(Object.entries(INITIAL).map(([k, v]) => [k, motionValue(v)]));
-  }
-  const controlsRef = useRef([]);
+  const [values] = useState(createValues);
+  const controlsRef = useRef<AnimationPlaybackControls[]>([]);
   const runRef = useRef(0);
 
   const [compare, setCompare] = useState(false);
@@ -151,7 +125,7 @@ const LogoAnimation = forwardRef(function LogoAnimation(
   const [done, setDone] = useState(false);
 
   const render = useCallback(() => {
-    const s = Object.fromEntries(Object.entries(valuesRef.current).map(([k, mv]) => [k, mv.get()]));
+    const s = Object.fromEntries(KEYS.map((k) => [k, values[k].get()])) as State;
     const e = els.current;
 
     // Gear
@@ -168,7 +142,9 @@ const LogoAnimation = forwardRef(function LogoAnimation(
 
     // Nozzle + pictogram
     setTransform(e.nozzle, `rotate(${s.tilt} ${NOZZLE.pivot.x} ${NOZZLE.pivot.y})`);
-    ['nozzleBodyLine', 'nozzleWindowLine', 'nozzleSpout', 'nozzleTail'].forEach((k) => setDraw(e[k], s.nozzleDraw));
+    (['nozzleBodyLine', 'nozzleWindowLine', 'nozzleSpout', 'nozzleTail'] as const).forEach((k) =>
+      setDraw(e[k], s.nozzleDraw),
+    );
     setOpacity(e.nozzleFill, s.nozzleFill);
     setOpacity(e.nozzleSpoutCore, s.nozzleFill);
     setOpacity(e.nozzleTip, s.nozzleFill);
@@ -176,13 +152,13 @@ const LogoAnimation = forwardRef(function LogoAnimation(
 
     // Droplet: drawn above the pictogram outline while hanging, behind it once falling inside.
     const drop = dropletState(s);
-    [
-      [e.dropFront, drop && drop.attached],
-      [e.dropBack, drop && !drop.attached],
-    ].forEach(([el, visible]) => {
+    ([
+      [e.dropFront, Boolean(drop?.attached)],
+      [e.dropBack, Boolean(drop && !drop.attached)],
+    ] as const).forEach(([el, visible]) => {
       if (!el) return;
       el.style.visibility = visible ? 'visible' : 'hidden';
-      if (visible) {
+      if (visible && drop) {
         el.setAttribute('d', drop.d);
         el.setAttribute('transform', drop.transform);
         el.style.opacity = String(drop.opacity);
@@ -213,7 +189,7 @@ const LogoAnimation = forwardRef(function LogoAnimation(
     }
     setOpacity(e.slogan, s.slogan);
     setTransform(e.slogan, `translate(0 ${(1 - s.slogan) * 10})`);
-  }, []);
+  }, [values]);
 
   // Batch all value changes into one DOM write per frame.
   useEffect(() => {
@@ -227,30 +203,30 @@ const LogoAnimation = forwardRef(function LogoAnimation(
       scheduled = true;
       frame.render(flush);
     };
-    const unsubs = Object.values(valuesRef.current).map((mv) => mv.on('change', schedule));
+    const unsubs = KEYS.map((k) => values[k].on('change', schedule));
     render();
     return () => {
       unsubs.forEach((u) => u());
       cancelFrame(flush);
     };
-  }, [render]);
+  }, [render, values]);
 
-  const stopAll = () => {
+  const stopAll = useCallback(() => {
     controlsRef.current.forEach((c) => c.stop());
     controlsRef.current = [];
-  };
+  }, []);
 
   const jumpTo = useCallback(
-    (state) => {
+    (state: State) => {
       stopAll();
-      Object.entries(state).forEach(([k, v]) => valuesRef.current[k].jump(v));
+      KEYS.forEach((k) => values[k].jump(state[k]));
       render();
     },
-    [render],
+    [render, stopAll, values],
   );
 
   const play = useCallback(
-    async ({ speed = 1 } = {}) => {
+    async ({ speed = 1 }: { speed?: number } = {}) => {
       const run = ++runRef.current;
       setDone(false);
       jumpTo(INITIAL);
@@ -273,23 +249,23 @@ const LogoAnimation = forwardRef(function LogoAnimation(
 
       const k = 1 / speed;
       controlsRef.current = TIMELINE.map(([key, target, { at, duration, ...rest }]) =>
-        animate(valuesRef.current[key], target, { ...rest, delay: at * k, duration: duration * k }),
+        animate(values[key], target, { ...rest, delay: at * k, duration: duration * k }),
       );
       await Promise.all(controlsRef.current);
       if (run !== runRef.current) return;
       setDone(true);
       onComplete?.();
     },
-    [jumpTo, onComplete, reduceMotion],
+    [jumpTo, onComplete, reduceMotion, values],
   );
 
   /** Freeze the timeline at `t` seconds — for QA and screenshots. */
   const seek = useCallback(
-    (t) => {
+    (t: number) => {
       runRef.current++;
       jumpTo(INITIAL);
       controlsRef.current = TIMELINE.map(([key, target, { at, duration, ...rest }]) => {
-        const c = animate(valuesRef.current[key], target, { ...rest, duration });
+        const c = animate(values[key], target, { ...rest, duration });
         c.pause();
         c.time = Math.min(duration, Math.max(0, t - at));
         return c;
@@ -297,7 +273,7 @@ const LogoAnimation = forwardRef(function LogoAnimation(
       render();
       setDone(t >= LOGO_ANIMATION_DURATION);
     },
-    [jumpTo, render],
+    [jumpTo, render, values],
   );
 
   useImperativeHandle(
@@ -306,21 +282,26 @@ const LogoAnimation = forwardRef(function LogoAnimation(
     [play, seek, jumpTo],
   );
 
+  // Start once per mount (and again if reduced-motion flips); later runs go through replay().
+  const playRef = useRef(play);
+  useEffect(() => {
+    playRef.current = play;
+  }, [play]);
+
   useEffect(() => {
     if (reduceMotion) {
       jumpTo(FINAL);
-      setDone(true);
+      queueMicrotask(() => setDone(true));
       return undefined;
     }
-    if (autoPlay) play();
+    if (autoPlay) void playRef.current();
     else jumpTo(INITIAL);
+    const runCounter = runRef; // a plain counter, not a DOM ref
     return () => {
-      runRef.current++;
+      runCounter.current++;
       stopAll();
     };
-    // play/jumpTo are stable for a given reduceMotion value.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoPlay, reduceMotion]);
+  }, [autoPlay, reduceMotion, jumpTo, stopAll]);
 
   const vb = `${VIEWBOX.x} ${VIEWBOX.y} ${VIEWBOX.w} ${VIEWBOX.h}`;
 

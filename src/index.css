@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #ffc400;
+  --color-brand-soft: #fff4cc;
+  --color-brand-deep: #e0a800;
+  --color-ink: #111111;
+  --color-ink-soft: #1b1b1b;
+  --color-ink-line: #2a2a2a;
+  --color-muted: #5c5c5c;
+  --color-muted-dark: #a3a3a3;
+  --color-paper: #f6f5f1;
+  --color-line: #e6e3dc;
+  --color-danger: #b42318;
+  --color-success: #067647;
+
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Saira', 'Inter Variable', system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(17 17 17 / 0.04), 0 12px 32px -12px rgb(17 17 17 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(17 17 17 / 0.05), 0 24px 48px -16px rgb(17 17 17 / 0.22);
+
+  --animate-drift: drift 22s ease-in-out infinite alternate;
+  --animate-drift-slow: drift 34s ease-in-out infinite alternate-reverse;
+  --animate-grid: grid-pan 40s linear infinite;
+  --animate-sweep: sweep 7s ease-in-out infinite;
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(4%, -6%, 0) scale(1.08);
+    }
+  }
+
+  @keyframes grid-pan {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 64px 64px;
+    }
+  }
+
+  @keyframes sweep {
+    0%,
+    55% {
+      transform: translateX(-120%);
+    }
+    100% {
+      transform: translateX(220%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  ::selection {
+    @apply bg-brand text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-deep);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-grid-dark {
+    background-image:
+      linear-gradient(to right, rgb(17 17 17 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(17 17 17 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

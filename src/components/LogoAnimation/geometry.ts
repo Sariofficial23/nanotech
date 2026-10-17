@@ -16,12 +16,12 @@ export const COLORS = {
   steel: '#5B5B5B',
 };
 
-const round = (n) => Math.round(n * 100) / 100;
-const rad = (deg) => (deg * Math.PI) / 180;
-const polar = (r, deg) => `${round(r * Math.cos(rad(deg)))} ${round(r * Math.sin(rad(deg)))}`;
+const round = (n: number) => Math.round(n * 100) / 100;
+const rad = (deg: number) => (deg * Math.PI) / 180;
+const polar = (r: number, deg: number) => `${round(r * Math.cos(rad(deg)))} ${round(r * Math.sin(rad(deg)))}`;
 
 /** Gear outline centred at (0,0). One tooth points straight up, like the original. */
-function buildGear({ teeth = 8, outer = 157, root = 134, tipHalf = 9.5, rootHalf = 14.5, start = -90 } = {}) {
+export function buildGear({ teeth = 8, outer = 157, root = 134, tipHalf = 9.5, rootHalf = 14.5, start = -90 } = {}) {
   const step = 360 / teeth;
   let d = '';
   for (let i = 0; i < teeth; i++) {
@@ -49,7 +49,7 @@ export const GEAR = {
  * @param cy  y of the round body centre
  * @param r   body radius
  */
-export function dropPath(cx, tipY, cy, r) {
+export function dropPath(cx: number, tipY: number, cy: number, r: number) {
   const k = cy - tipY;
   const c1y = tipY + k * 0.3;
   return (
