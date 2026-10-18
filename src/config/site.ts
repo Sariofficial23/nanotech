@@ -22,8 +22,9 @@ export const NAV_ITEMS = [
 
 export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'shoxobcha' | 'jarayon' | 'savol-javob';
 
-const phone = env(import.meta.env.VITE_CONTACT_PHONE);
-const telegram = env(import.meta.env.VITE_CONTACT_TELEGRAM)?.replace(/^@/, '') ?? null;
+// Official contacts confirmed by the company; env variables can still override them.
+const phone = env(import.meta.env.VITE_CONTACT_PHONE) ?? '+998 98 274 05 05';
+const telegram = (env(import.meta.env.VITE_CONTACT_TELEGRAM) ?? 'kuchmaAZS').replace(/^@/, '');
 const email = env(import.meta.env.VITE_CONTACT_EMAIL);
 
 export interface ContactChannel {
