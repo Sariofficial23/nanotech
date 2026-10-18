@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowRight, MapPin, Route, Zap } from 'lucide-react';
-import { BRAND } from '../config/site';
 import { requestContact } from '../lib/contactIntent';
 import { Button, ButtonLink } from '../components/ui/Button';
+import CountUp from '../components/ui/CountUp';
 import Picture from '../components/ui/Picture';
 
 const HIGHLIGHTS = [
@@ -52,13 +52,23 @@ export default function Hero({ ready = true }: HeroProps) {
           <motion.h1
             id="hero-title"
             {...appear(0.15)}
-            className="font-display text-[2.6rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.6rem]"
+            aria-label="Oyiga 5 000 dollardan ortiq daromad qilishni xohlaysizmi?"
+            className="font-display text-[2.4rem] leading-[1.04] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.2rem]"
           >
-            Yoqilg‘i quyishning <span className="text-brand">yangi formati</span>
+            <span aria-hidden="true">
+              Oyiga{' '}
+              <span className="relative inline-block whitespace-nowrap text-brand [text-shadow:0_0_40px_rgb(255_196_0/0.45)]">
+                $<CountUp to={5000} start={ready} />+
+              </span>{' '}
+              daromad qilishni xohlaysizmi?
+            </span>
           </motion.h1>
 
-          <motion.p {...appear(0.28)} className="mt-6 max-w-xl text-lg leading-relaxed text-white/70 text-pretty sm:text-xl">
-            {BRAND.description}
+          <motion.p {...appear(0.28)} className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty sm:text-xl">
+            Hamkorlarimizdan ayrimlari ilk oylardanoq oyiga $5 000 dan ortiq daromad qilmoqda.{' '}
+            <span className="text-white/60">
+              NanoTech — yoqilg‘i quyishning yangi formati: shaharlar va avtomobil yo‘llari uchun ixcham shoxobchalar.
+            </span>
           </motion.p>
 
           <motion.div {...appear(0.4)} className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -69,6 +79,9 @@ export default function Hero({ ready = true }: HeroProps) {
               Loyihamiz bilan tanishing
             </ButtonLink>
           </motion.div>
+          <motion.p {...appear(0.46)} className="mt-4 max-w-xl text-xs leading-relaxed text-white/45">
+            * Daromad kafolatlanmaydi: natija joylashuv, savdo hajmi va boshqa omillarga bog‘liq.
+          </motion.p>
 
           <motion.ul {...appear(0.52)} className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/60">
             {HIGHLIGHTS.map(({ icon: Icon, label }) => (
