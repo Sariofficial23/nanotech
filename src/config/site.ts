@@ -9,7 +9,7 @@ export const BRAND = {
   name: 'NanoTech',
   slogan: 'Sifat • Ishonch • Samaradorlik',
   description:
-    'NanoTech — shaharlar va avtomobil yo‘llari uchun ixcham yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga yo‘naltirilgan loyiha.',
+    'NanoTech — shaharlar va avtomobil yo‘llari uchun ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga yo‘naltirilgan loyiha.',
 } as const;
 
 export const NAV_ITEMS = [

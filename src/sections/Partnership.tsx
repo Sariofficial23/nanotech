@@ -9,13 +9,13 @@ const PARTNERS: { icon: typeof LandPlot; title: string; text: string; interest: 
   {
     icon: LandPlot,
     title: 'Yer maydoni egalari',
-    text: 'Shahar ichida yoki yo‘l bo‘yida maydoningiz bo‘lsa, uni ixcham shoxobcha uchun ko‘rib chiqishni taklif qilishingiz mumkin.',
+    text: 'Shahar ichida yoki yo‘l bo‘yida maydoningiz bo‘lsa, uni ko‘chma shoxobcha uchun ko‘rib chiqishni taklif qilishingiz mumkin.',
     interest: 'yer-maydoni',
   },
   {
     icon: Handshake,
     title: 'Tadbirkorlar',
-    text: 'Ixcham shoxobcha formatida birgalikda ishlash imkoniyatlarini muhokama qilish uchun murojaat qiling.',
+    text: 'Ko‘chma shoxobcha formatida birgalikda ishlash imkoniyatlarini muhokama qilish uchun murojaat qiling.',
     interest: 'tadbirkor',
   },
   {
@@ -37,7 +37,7 @@ export default function Partnership() {
           tone="brand"
           eyebrow="Hamkorlik"
           title="NanoTech bilan hamkorlik qiling"
-          lead="Ixcham yoqilg‘i quyish shoxobchalarini rivojlantirish bo‘yicha hamkorlikni muhokama qilish uchun biz bilan bog‘lanishingiz mumkin."
+          lead="Ko‘chma yoqilg‘i quyish shoxobchalarini rivojlantirish bo‘yicha hamkorlikni muhokama qilish uchun biz bilan bog‘lanishingiz mumkin."
         />
         <Reveal className="shrink-0">
           <Button variant="dark" size="lg" onClick={() => requestContact()} icon={<ArrowRight className="h-4 w-4" />}>

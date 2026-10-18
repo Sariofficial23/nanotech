@@ -6,7 +6,7 @@ import CountUp from '../components/ui/CountUp';
 import Picture from '../components/ui/Picture';
 
 const HIGHLIGHTS = [
-  { icon: Zap, label: 'Ixcham format' },
+  { icon: Zap, label: 'Ko‘chma format' },
   { icon: MapPin, label: 'Shahar uchun' },
   { icon: Route, label: 'Avtomobil yo‘llari uchun' },
 ];
@@ -46,7 +46,7 @@ export default function Hero({ ready = true }: HeroProps) {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-white/80 backdrop-blur"
           >
             <span className="h-2 w-2 rounded-full bg-brand shadow-[0_0_12px_2px_rgb(255_196_0/0.7)]" aria-hidden="true" />
-            Ixcham AYOQSH loyihasi
+            Ko‘chma AYoQSh loyihasi
           </motion.p>
 
           <motion.h1
@@ -67,7 +67,7 @@ export default function Hero({ ready = true }: HeroProps) {
           <motion.p {...appear(0.28)} className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty sm:text-xl">
             Hamkorlarimizdan ayrimlari ilk oylardanoq oyiga $5 000 dan ortiq daromad qilmoqda.{' '}
             <span className="text-white/60">
-              NanoTech — yoqilg‘i quyishning yangi formati: shaharlar va avtomobil yo‘llari uchun ixcham shoxobchalar.
+              NanoTech — yoqilg‘i quyishning yangi formati: shaharlar va avtomobil yo‘llari uchun ko‘chma shoxobchalar.
             </span>
           </motion.p>
 
@@ -102,7 +102,7 @@ export default function Hero({ ready = true }: HeroProps) {
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.35)] sm:p-3">
             <Picture
               name="station-sunset"
-              alt="NanoTech ixcham yoqilg‘i quyish shoxobchasi quyosh botishida (vizualizatsiya)"
+              alt="NanoTech ko‘chma yoqilg‘i quyish shoxobchasi quyosh botishida (vizualizatsiya)"
               sizes="(min-width: 1024px) 46vw, 100vw"
               priority
               className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"

@@ -15,14 +15,14 @@ interface Solution {
 const SOLUTIONS: Solution[] = [
   {
     icon: Fuel,
-    title: 'Ixcham AYOQSH',
+    title: 'Ko‘chma AYoQSh',
     text: 'Kichik maydonga moslashtirilgan zamonaviy yoqilg‘i quyish shoxobchasi formati. NanoTech aynan shu formatni rivojlantirishga yo‘naltirilgan.',
     featured: true,
   },
   {
     icon: Building2,
     title: 'Shahar uchun yechimlar',
-    text: 'Shahar muhitidagi maydonlarda ixcham shoxobcha joylashtirish variantlarini birgalikda o‘rganish mumkin.',
+    text: 'Shahar muhitidagi maydonlarda ko‘chma shoxobcha joylashtirish variantlarini birgalikda o‘rganish mumkin.',
   },
   {
     icon: Route,
@@ -43,8 +43,8 @@ export default function Solutions() {
       <SectionHeading
         id="solutions-title"
         eyebrow="Yechimlarimiz"
-        title="Ixcham format — turli joylar uchun"
-        lead="Ixcham yoqilg‘i quyish shoxobchasi shahar ichida ham, avtomobil yo‘llari bo‘yida ham ko‘rib chiqilishi mumkin bo‘lgan format."
+        title="Ko‘chma format — turli joylar uchun"
+        lead="Ko‘chma yoqilg‘i quyish shoxobchasi shahar ichida ham, avtomobil yo‘llari bo‘yida ham ko‘rib chiqilishi mumkin bo‘lgan format."
       />
 
       <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">

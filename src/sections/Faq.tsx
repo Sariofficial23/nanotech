@@ -6,10 +6,10 @@ const FAQ: AccordionItem[] = [
   {
     question: 'NanoTech nima bilan shug‘ullanadi?',
     answer:
-      'NanoTech — ixcham yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llari uchun zamonaviy yechimlarni rivojlantirishga intilamiz.',
+      'NanoTech — ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llari uchun zamonaviy yechimlarni rivojlantirishga intilamiz.',
   },
   {
-    question: 'Ixcham AYOQSH qayerda joylashtirilishi mumkin?',
+    question: 'Ko‘chma AYoQSh qayerda joylashtirilishi mumkin?',
     answer:
       'Shahar ichidagi maydonlar va avtomobil yo‘llari bo‘yidagi joylar ko‘rib chiqilishi mumkin. Aniq joy maydonning xususiyatlari, texnik shartlar va zarur ruxsatnomalar asosida baholanadi.',
   },

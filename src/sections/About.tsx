@@ -6,7 +6,7 @@ import { Section, SectionHeading } from '../components/ui/Section';
 const CONCEPT = [
   {
     icon: LandPlot,
-    title: 'Ixcham format',
+    title: 'Ko‘chma format',
     text: 'Shoxobcha kichik maydonlarga joylashtirishga mo‘ljallangan yechim sifatida rivojlantiriladi.',
   },
   {
@@ -30,7 +30,7 @@ export default function About() {
             id="about-title"
             eyebrow="Biz haqimizda"
             title="NanoTech haqida"
-            lead="NanoTech — ixcham yoqilg‘i quyish shoxobchalarini yaratish va ularni rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llarida joylashtirish mumkin bo‘lgan zamonaviy yechimlarni rivojlantirishga intilamiz."
+            lead="NanoTech — ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va ularni rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llarida joylashtirish mumkin bo‘lgan zamonaviy yechimlarni rivojlantirishga intilamiz."
           />
 
           <ul className="mt-10 space-y-6">
@@ -53,7 +53,7 @@ export default function About() {
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.25)] sm:p-3">
             <Picture
               name="station-highway"
-              alt="Avtomobil yo‘li bo‘yidagi NanoTech ixcham shoxobchasi (vizualizatsiya)"
+              alt="Avtomobil yo‘li bo‘yidagi NanoTech ko‘chma shoxobchasi (vizualizatsiya)"
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"
             />

@@ -13,7 +13,7 @@ import StationScene from '../components/story/StationScene';
 import { STORY_STEPS, stepAt } from '../components/story/storyTimeline';
 import { forceMotion } from '../lib/intro';
 
-const TITLE = 'Ixcham shoxobchada jarayon qanday ko‘rinadi?';
+const TITLE = 'Ko‘chma shoxobchada jarayon qanday ko‘rinadi?';
 
 function Heading() {
   return (

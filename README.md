@@ -1,6 +1,6 @@
 # NanoTech — korporativ sayt
 
-Ixcham yoqilg‘i quyish shoxobchalari loyihasi uchun bir sahifali korporativ sayt.
+Ko‘chma yoqilg‘i quyish shoxobchalari loyihasi uchun bir sahifali korporativ sayt.
 Stack: React 19 + TypeScript + Vite 8, Tailwind CSS 4, Framer Motion, Lucide, React Hook Form + Zod.
 Arizalar Vercel Function (`api/lead.ts`) orqali Telegram’ga yuboriladi.
 
@@ -90,7 +90,7 @@ Har bir `git push` dan keyin Vercel avtomatik yangi versiyani chiqaradi.
 
 - Stansiya rasmlari — vizualizatsiyalar (saytda shunday belgilangan). Asl PNG’lar repozitoriyda saqlanmaydi;
   yangilash: `npm run images -- "D:\nano tech"` → `public/images/*.avif|webp` va `public/og.jpg`.
-- “Ixcham shoxobchada jarayon qanday ko‘rinadi?” bo‘limi sahifa aylantirilganda ishlaydi: bir xil burchakdan
+- “Ko‘chma shoxobchada jarayon qanday ko‘rinadi?” bo‘limi sahifa aylantirilganda ishlaydi: bir xil burchakdan
   olingan ikki rasm (`station-arrive` → `station-refuel`) sekin yaqinlashish bilan bir-biriga o‘tadi.
   Sozlamalar — `components/story/storyTimeline.ts`. `prefers-reduced-motion` da statik kadr ko‘rsatiladi.
 
