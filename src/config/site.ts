@@ -25,11 +25,13 @@ export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'shoxobcha' | 'jarayo
 // Official contacts confirmed by the company; env variables can still override them.
 const phone = env(import.meta.env.VITE_CONTACT_PHONE) ?? '+998 98 274 05 05';
 const telegram = (env(import.meta.env.VITE_CONTACT_TELEGRAM) ?? 'kuchmaAZS').replace(/^@/, '');
-const email = env(import.meta.env.VITE_CONTACT_EMAIL);
+const instagram = (env(import.meta.env.VITE_CONTACT_INSTAGRAM) ?? 'nanotex_azs').replace(/^@/, '');
 
 export interface ContactChannel {
-  kind: 'phone' | 'telegram' | 'email';
+  kind: 'phone' | 'telegram' | 'instagram';
   label: string;
+  /** Accessible name for icon-only links. */
+  action: string;
   value: string | null;
   href: string | null;
 }
@@ -38,20 +40,23 @@ export const CONTACTS: ContactChannel[] = [
   {
     kind: 'phone',
     label: 'Telefon',
+    action: `Qo‘ng‘iroq qilish: ${phone}`,
     value: phone,
     href: phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : null,
   },
   {
     kind: 'telegram',
     label: 'Telegram',
+    action: 'Telegram’da yozish',
     value: telegram ? `@${telegram}` : null,
     href: telegram ? `https://t.me/${telegram}` : null,
   },
   {
-    kind: 'email',
-    label: 'Elektron pochta',
-    value: email,
-    href: email ? `mailto:${email}` : null,
+    kind: 'instagram',
+    label: 'Instagram',
+    action: 'Instagram sahifamiz',
+    value: instagram ? `@${instagram}` : null,
+    href: instagram ? `https://www.instagram.com/${instagram}` : null,
   },
 ];
 

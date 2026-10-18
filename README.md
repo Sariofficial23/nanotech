@@ -54,7 +54,7 @@ src/
 | `TELEGRAM_CHAT_ID` | faqat server | arizalar keladigan chat/guruh ID si (bot u yerda a’zo bo‘lishi kerak) |
 | `VITE_CONTACT_PHONE` | sayt | rasmiy telefon, masalan `+998 90 000 00 00` |
 | `VITE_CONTACT_TELEGRAM` | sayt | Telegram username (`@` siz ham bo‘ladi) |
-| `VITE_CONTACT_EMAIL` | sayt | rasmiy elektron pochta |
+| `VITE_CONTACT_INSTAGRAM` | sayt | Instagram username (standart: `nanotex_azs`) |
 | `VITE_SITE_URL` | sayt | sayt manzili (Open Graph uchun). Vercel’da bo‘sh qolsa, production domeni olinadi |
 | `VITE_LEAD_ENDPOINT` | sayt | ixtiyoriy: arizalarni boshqa endpointga yuborish |
 

@@ -1,12 +1,6 @@
-import { Mail, Phone, Send, type LucideIcon } from 'lucide-react';
-import { CONTACTS, type ContactChannel } from '../../config/site';
+import { CONTACTS } from '../../config/site';
 import { cn } from '../../lib/cn';
-
-const ICONS: Record<ContactChannel['kind'], LucideIcon> = {
-  phone: Phone,
-  telegram: Send,
-  email: Mail,
-};
+import { CHANNEL_ICONS } from './channelIcons';
 
 interface ContactChannelsProps {
   tone?: 'dark' | 'light';
@@ -20,7 +14,7 @@ export default function ContactChannels({ tone = 'dark', compact = false, classN
   return (
     <ul className={cn(compact ? 'space-y-3' : 'space-y-3.5', className)}>
       {CONTACTS.map((channel) => {
-        const Icon = ICONS[channel.kind];
+        const Icon = CHANNEL_ICONS[channel.kind];
         const body = (
           <>
             <span
@@ -50,8 +44,8 @@ export default function ContactChannels({ tone = 'dark', compact = false, classN
             {channel.href ? (
               <a
                 href={channel.href}
-                target={channel.kind === 'telegram' ? '_blank' : undefined}
-                rel={channel.kind === 'telegram' ? 'noopener noreferrer' : undefined}
+                target={channel.kind === 'phone' ? undefined : '_blank'}
+                rel={channel.kind === 'phone' ? undefined : 'noopener noreferrer'}
                 className={cn(
                   'flex items-center gap-3.5 rounded-2xl transition-colors',
                   !compact && 'p-2 -m-2',
