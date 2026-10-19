@@ -37,7 +37,7 @@ export default function Partnership() {
           id="partnership-title"
           tone="brand"
           eyebrow="Hamkorlik"
-          title={<><Logo tone="light" className="align-middle" /> bilan hamkorlik qiling</>}
+          title={<><Logo tone="dark" className="align-middle rounded-2xl bg-ink px-4 py-2.5 shadow-lg" /> bilan hamkorlik qiling</>}
           lead="Ko‘chma yoqilg‘i quyish shoxobchalarini rivojlantirish bo‘yicha hamkorlikni muhokama qilish uchun biz bilan bog‘lanishingiz mumkin."
         />
         <Reveal className="shrink-0">
