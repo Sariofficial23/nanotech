@@ -52,15 +52,16 @@ export default function Hero({ ready = true }: HeroProps) {
           <motion.h1
             id="hero-title"
             {...appear(0.15)}
-            aria-label="Oyiga 5 000 dollardan ortiq daromad qilishni xohlaysizmi?"
+            aria-label="Oyiga 1 000 dollardan 5 000 dollargacha va undan ham ko‘proq daromad qilishni xohlaysizmi?"
             className="font-display text-[2.4rem] leading-[1.04] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.2rem]"
           >
             <span aria-hidden="true">
               Oyiga{' '}
               <span className="relative inline-block whitespace-nowrap text-brand [text-shadow:0_0_40px_rgb(255_196_0/0.45)]">
-                $<CountUp to={5000} start={ready} />+
+                $1 000 dan
               </span>{' '}
-              daromad qilishni xohlaysizmi?
+              <span className="whitespace-nowrap text-brand">$<CountUp to={5000} start={ready} /> gacha</span>{' '}
+              va undan ham ko‘proq daromad qilishni xohlaysizmi?
             </span>
           </motion.h1>
 
