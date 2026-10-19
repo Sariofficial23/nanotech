@@ -28,7 +28,7 @@ const telegram = (env(import.meta.env.VITE_CONTACT_TELEGRAM) ?? 'kuchmaAZS').rep
 const instagram = (env(import.meta.env.VITE_CONTACT_INSTAGRAM) ?? 'nanotex_azs').replace(/^@/, '');
 
 export interface ContactChannel {
-  kind: 'phone' | 'telegram' | 'instagram';
+  kind: 'phone' | 'telegram' | 'telegram-group' | 'instagram';
   label: string;
   /** Accessible name for icon-only links. */
   action: string;
@@ -50,6 +50,13 @@ export const CONTACTS: ContactChannel[] = [
     action: 'Telegram’da yozish',
     value: telegram ? `@${telegram}` : null,
     href: telegram ? `https://t.me/${telegram}` : null,
+  },
+  {
+    kind: 'telegram-group',
+    label: 'Telegram guruhimiz',
+    action: 'Telegram guruhimizga qo‘shilish',
+    value: 'Guruhga qo‘shilish',
+    href: 'https://t.me/+hPwzEB4SXttmZGYy',
   },
   {
     kind: 'instagram',

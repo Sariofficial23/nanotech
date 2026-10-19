@@ -6,7 +6,7 @@ import { CHANNEL_ICONS } from './channelIcons';
 export default function SocialLinks({ className }: { className?: string }) {
   return (
     <ul className={cn('flex items-center gap-1.5 sm:gap-2', className)}>
-      {CONTACTS.filter((c) => c.href).map((channel) => {
+      {CONTACTS.filter((c) => c.href && c.kind !== 'telegram-group').map((channel) => {
         const Icon = CHANNEL_ICONS[channel.kind];
         const external = channel.kind !== 'phone';
         return (
