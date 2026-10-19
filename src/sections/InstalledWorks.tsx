@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Check, Hand, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Hand, MapPin, ShieldCheck } from 'lucide-react';
 import { Section, SectionHeading } from '../components/ui/Section';
 import Picture from '../components/ui/Picture';
 import { Button } from '../components/ui/Button';
 import { requestContact } from '../lib/contactIntent';
 import { cn } from '../lib/cn';
+
+const REGIONS = ['Nukus', 'Xorazm', 'Buxoro', 'Navoiy', 'Jizzax', 'Samarqand', 'Surxondaryo', 'Sirdaryo', 'Qo‘qon'] as const;
 
 const PHOTOS = [
   { name: 'work-01', label: 'AYoQSh — old tomondan', equipment: true },
@@ -50,6 +52,19 @@ export default function InstalledWorks() {
         title="Suratlarda — o‘rnatilgan shoxobchalar"
         lead="Amalga oshirilgan ishlarimiz bilan tanishing. Suratlarni varaqlab, ko‘rinishi, komplektatsiyasi va narxini solishtiring."
       />
+      <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-7" aria-labelledby="works-regions-title">
+        <h3 id="works-regions-title" className="flex items-center gap-2.5 text-base font-semibold sm:text-lg">
+          <MapPin className="h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
+          Shoxobchalarimiz o‘rnatilgan hududlar
+        </h3>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {REGIONS.map((region) => (
+            <li key={region} className="rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-medium text-white/85">
+              {region}
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-white/10 bg-ink lg:grid lg:grid-cols-[1.35fr_1fr]">
         <div className="min-w-0 border-b border-white/10 lg:border-r lg:border-b-0">
           <div className="relative bg-[#090909]">
