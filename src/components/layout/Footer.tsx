@@ -25,6 +25,7 @@ export default function Footer() {
                 </a>
               </li>
             ))}
+            <li><a href="#ishlarimiz" className="text-white/60 transition-colors hover:text-brand">Ishlarimiz</a></li>
             <li>
               <a href="#savol-javob" className="text-white/60 transition-colors hover:text-brand">
                 Savol-javob
@@ -43,7 +44,7 @@ export default function Footer() {
           <p>
             © {year} {BRAND.name}. Barcha huquqlar himoyalangan.
           </p>
-          <p>Saytdagi tasvirlar konsept xarakteriga ega.</p>
+          <p>Vizualizatsiyalar alohida belgilangan. Ishlarimiz — haqiqiy suratlarda.</p>
         </div>
       </div>
     </footer>

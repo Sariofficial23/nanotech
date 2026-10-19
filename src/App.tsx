@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import IntroOverlay from './components/layout/IntroOverlay';
 import { shouldShowIntro } from './lib/intro';
+import InstalledWorks from './sections/InstalledWorks';
 import About from './sections/About';
 import Contact from './sections/Contact';
 import Faq from './sections/Faq';
@@ -31,6 +32,7 @@ export default function App() {
         <ScrollStory />
         <About />
         <Solutions />
+        <InstalledWorks />
         <Process />
         <Partnership />
         <Faq />
