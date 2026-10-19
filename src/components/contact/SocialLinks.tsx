@@ -14,7 +14,7 @@ export default function SocialLinks({ className }: { className?: string }) {
             <a
               href={channel.href ?? undefined}
               aria-label={channel.action}
-              title={channel.value ?? undefined}
+              title={channel.label}
               target={external ? '_blank' : undefined}
               rel={external ? 'noopener noreferrer' : undefined}
               className="grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:border-brand hover:bg-brand hover:text-ink sm:h-10 sm:w-10"

@@ -1,5 +1,6 @@
 import { ArrowRight, Briefcase, Handshake, LandPlot } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import Logo from '../components/brand/Logo';
 import Reveal from '../components/ui/Reveal';
 import { Section, SectionHeading } from '../components/ui/Section';
 import { requestContact } from '../lib/contactIntent';
@@ -36,7 +37,7 @@ export default function Partnership() {
           id="partnership-title"
           tone="brand"
           eyebrow="Hamkorlik"
-          title="NanoTech bilan hamkorlik qiling"
+          title={<><Logo tone="light" className="align-middle" /> bilan hamkorlik qiling</>}
           lead="Ko‘chma yoqilg‘i quyish shoxobchalarini rivojlantirish bo‘yicha hamkorlikni muhokama qilish uchun biz bilan bog‘lanishingiz mumkin."
         />
         <Reveal className="shrink-0">

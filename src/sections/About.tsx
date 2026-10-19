@@ -1,4 +1,5 @@
 import { LandPlot, MapPinned, ScanSearch } from 'lucide-react';
+import Logo from '../components/brand/Logo';
 import Picture from '../components/ui/Picture';
 import Reveal from '../components/ui/Reveal';
 import { Section, SectionHeading } from '../components/ui/Section';
@@ -29,7 +30,7 @@ export default function About() {
           <SectionHeading
             id="about-title"
             eyebrow="Biz haqimizda"
-            title="NanoTech haqida"
+            title={<><Logo tone="dark" className="align-middle" /> haqida</>}
             lead="NanoTech — ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va ularni rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llarida joylashtirish mumkin bo‘lgan zamonaviy yechimlarni rivojlantirishga intilamiz."
           />
 

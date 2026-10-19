@@ -8,55 +8,39 @@ interface ContactChannelsProps {
   className?: string;
 }
 
-/** Official contacts. Channels without a value show a neutral "will be added" placeholder. */
+const ACTIONS = {
+  phone: 'Qo‘ng‘iroq qilish',
+  telegram: 'Telegram’da yozish',
+  'telegram-group': 'Guruhga qo‘shilish',
+  instagram: 'Instagram’ni ochish',
+} as const;
+
+/** Action links keep private-looking contact details out of the visible layout. */
 export default function ContactChannels({ tone = 'dark', compact = false, className }: ContactChannelsProps) {
   const dark = tone === 'dark';
   return (
-    <ul className={cn(compact ? 'space-y-3' : 'space-y-3.5', className)}>
-      {CONTACTS.map((channel) => {
+    <ul className={cn('grid grid-cols-2 gap-3', className)}>
+      {CONTACTS.filter((channel) => channel.href).map((channel) => {
         const Icon = CHANNEL_ICONS[channel.kind];
-        const body = (
-          <>
-            <span
+        return (
+          <li key={channel.kind} className="min-w-0">
+            <a
+              href={channel.href!}
+              aria-label={ACTIONS[channel.kind]}
+              target={channel.kind === 'phone' ? undefined : '_blank'}
+              rel={channel.kind === 'phone' ? undefined : 'noopener noreferrer'}
               className={cn(
-                'grid shrink-0 place-items-center rounded-xl',
-                compact ? 'h-9 w-9' : 'h-11 w-11',
-                dark ? 'bg-white/8 text-brand' : 'bg-paper text-ink',
+                'group flex h-full min-h-24 flex-col items-center justify-center gap-3 rounded-2xl border p-3 text-center transition-colors',
+                dark ? 'border-white/10 bg-white/[0.03] hover:border-brand/60 hover:bg-brand/10' : 'border-ink/15 hover:border-ink/40',
               )}
             >
-              <Icon className={compact ? 'h-4 w-4' : 'h-5 w-5'} aria-hidden="true" />
-            </span>
-            <span className="min-w-0">
-              <span className={cn('block text-xs tracking-wide uppercase', dark ? 'text-white/50' : 'text-muted')}>
-                {channel.label}
+              <span className={cn('grid h-11 w-11 shrink-0 place-items-center rounded-full', dark ? 'bg-white/8 text-brand' : 'bg-paper text-ink')}>
+                <Icon className="h-5 w-5" aria-hidden="true" />
               </span>
-              {channel.value ? (
-                <span className={cn('block truncate font-medium', compact ? 'text-sm' : 'text-base')}>{channel.value}</span>
-              ) : (
-                <span className={cn('block text-sm italic', dark ? 'text-white/45' : 'text-muted')}>Tez orada qo‘shiladi</span>
-              )}
-            </span>
-          </>
-        );
-
-        return (
-          <li key={channel.kind}>
-            {channel.href ? (
-              <a
-                href={channel.href}
-                target={channel.kind === 'phone' ? undefined : '_blank'}
-                rel={channel.kind === 'phone' ? undefined : 'noopener noreferrer'}
-                className={cn(
-                  'flex items-center gap-3.5 rounded-2xl transition-colors',
-                  !compact && 'p-2 -m-2',
-                  dark ? 'hover:text-brand' : 'hover:text-brand-deep',
-                )}
-              >
-                {body}
-              </a>
-            ) : (
-              <div className={cn('flex items-center gap-3.5', !compact && 'p-2 -m-2')}>{body}</div>
-            )}
+              <span className={cn('font-medium leading-snug', compact ? 'text-xs' : 'text-sm')}>
+                {ACTIONS[channel.kind]}
+              </span>
+            </a>
           </li>
         );
       })}
