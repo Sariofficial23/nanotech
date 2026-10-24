@@ -20,7 +20,7 @@ export const NAV_ITEMS = [
   { id: 'aloqa', label: 'Aloqa' },
 ] as const;
 
-export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'ishlarimiz';
+export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'ishlarimiz';
 
 // Official contacts confirmed by the company; env variables can still override them.
 const phone = env(import.meta.env.VITE_CONTACT_PHONE) ?? '+998 98 274 05 05';

@@ -5,6 +5,7 @@ export const INTERESTS = [
   { value: 'yer-maydoni', label: 'Yer maydoni egasiman' },
   { value: 'tadbirkor', label: 'Tadbirkorman' },
   { value: 'investor', label: 'Investorman' },
+  { value: 'kompaniya', label: 'Kompaniya vakiliman' },
   { value: 'boshqa', label: 'Boshqa savol' },
 ] as const;
 

@@ -8,6 +8,7 @@ import InstalledWorks from './sections/InstalledWorks';
 import About from './sections/About';
 import Contact from './sections/Contact';
 import Faq from './sections/Faq';
+import Directions from './sections/Directions';
 import Hero from './sections/Hero';
 import Partnership from './sections/Partnership';
 import Process from './sections/Process';
@@ -29,6 +30,7 @@ export default function App() {
       <Header />
       <main id="asosiy">
         <Hero ready={!introOpen} />
+        <Directions />
         <ScrollStory />
         <About />
         <Solutions />
