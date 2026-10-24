@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Menu, X } from 'lucide-react';
-import { NAV_ITEMS } from '../../config/site';
+import { NAV_IDS } from '../../config/site';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import { useScrolled } from '../../hooks/useScrolled';
+import { useI18n } from '../../i18n/context';
 import { cn } from '../../lib/cn';
 import Logo from '../brand/Logo';
 import { ButtonLink } from '../ui/Button';
+import LanguageMenu from './LanguageMenu';
+import PhoneMenu from './PhoneMenu';
 
-const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
+const SECTION_IDS = NAV_IDS;
 
 export default function Header() {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled();
   const active = useActiveSection(SECTION_IDS);
@@ -38,19 +42,19 @@ export default function Header() {
         solid ? 'border-b border-white/10 bg-ink/85 backdrop-blur-xl' : 'border-b border-transparent',
       )}
     >
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-        <a href="#bosh-sahifa" className="rounded-lg" aria-label="NANOTEX — bosh sahifa" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6 lg:px-8">
+        <a href="#bosh-sahifa" className="rounded-lg" aria-label={t.header.home} onClick={() => setOpen(false)}>
           <Logo tone="dark" />
         </a>
 
-        <nav aria-label="Asosiy menyu" className="hidden lg:block">
+        <nav aria-label={t.header.mainMenu} className="hidden lg:block">
           <ul className="flex items-center gap-1">
-            {NAV_ITEMS.map((item) => {
-              const isActive = active === item.id;
+            {NAV_IDS.map((id) => {
+              const isActive = active === id;
               return (
-                <li key={item.id}>
+                <li key={id}>
                   <a
-                    href={`#${item.id}`}
+                    href={`#${id}`}
                     aria-current={isActive ? 'true' : undefined}
                     className={cn(
                       'relative rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors',
@@ -58,7 +62,7 @@ export default function Header() {
                       isActive && 'text-white',
                     )}
                   >
-                    {item.label}
+                    {t.nav[id]}
                     {isActive && (
                       <motion.span
                         layoutId="nav-active"
@@ -73,10 +77,9 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <ButtonLink href="#aloqa" variant="primary" className="max-sm:hidden" icon={<ArrowRight className="h-4 w-4" />}>
-            Bog‘lanish
-          </ButtonLink>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <PhoneMenu />
+          <LanguageMenu />
           <button
             type="button"
             className={cn(
@@ -85,7 +88,7 @@ export default function Header() {
             )}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open ? 'Menyuni yopish' : 'Menyuni ochish'}
+            aria-label={open ? t.header.closeMenu : t.header.openMenu}
             onClick={() => setOpen((v) => !v)}
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -113,32 +116,32 @@ export default function Header() {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/10 bg-ink text-white lg:hidden"
           >
-            <nav aria-label="Mobil menyu" className="px-4 pt-4 pb-8 sm:px-6">
+            <nav aria-label={t.header.mobileMenu} className="px-4 pt-4 pb-8 sm:px-6">
               <ul className="divide-y divide-white/10">
-                {NAV_ITEMS.map((item, i) => (
+                {NAV_IDS.map((id, i) => (
                   <motion.li
-                    key={item.id}
+                    key={id}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * i + 0.05, duration: 0.25 }}
                   >
                     <a
-                      href={`#${item.id}`}
+                      href={`#${id}`}
                       onClick={() => setOpen(false)}
-                      aria-current={active === item.id ? 'true' : undefined}
+                      aria-current={active === id ? 'true' : undefined}
                       className="flex items-center justify-between py-4 font-display text-2xl font-semibold"
                     >
-                      {item.label}
+                      {t.nav[id]}
                       <ArrowRight
                         aria-hidden="true"
-                        className={cn('h-5 w-5', active === item.id ? 'text-brand' : 'text-white/25')}
+                        className={cn('h-5 w-5', active === id ? 'text-brand' : 'text-white/25')}
                       />
                     </a>
                   </motion.li>
                 ))}
               </ul>
               <ButtonLink href="#aloqa" size="lg" className="mt-8 w-full" onClick={() => setOpen(false)}>
-                Bog‘lanish
+                {t.header.contact}
               </ButtonLink>
             </nav>
           </motion.div>

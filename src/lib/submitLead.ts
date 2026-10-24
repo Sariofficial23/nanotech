@@ -1,3 +1,4 @@
+import type { Lang } from '../i18n/langs';
 import type { Lead } from './leadSchema';
 
 /**
@@ -22,13 +23,13 @@ export class LeadSubmitError extends Error {
 const ENDPOINT = import.meta.env.VITE_LEAD_ENDPOINT?.trim() || '/api/lead';
 const TIMEOUT_MS = 15_000;
 
-export async function submitLead(lead: Lead): Promise<void> {
+export async function submitLead(lead: Lead, lang: Lang = 'uz'): Promise<void> {
   let response: Response;
   try {
     response = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ ...lead, page: window.location.href }),
+      body: JSON.stringify({ ...lead, lang, page: window.location.href }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
   } catch {

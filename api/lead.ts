@@ -32,6 +32,8 @@ export async function POST(request: Request) {
   const { name, phone, interest, comment } = parsed.data;
   const page = typeof (payload as { page?: unknown }).page === 'string' ? (payload as { page: string }).page : '';
   const time = new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' });
+  const rawLang = (payload as { lang?: unknown }).lang;
+  const lang = rawLang === 'ru' || rawLang === 'en' || rawLang === 'uz' ? rawLang.toUpperCase() : null;
 
   const text = [
     '<b>Saytdan yangi so‘rov</b>',
@@ -40,6 +42,7 @@ export async function POST(request: Request) {
     `<b>Telefon:</b> ${escapeHtml(phone)}`,
     `<b>Yo‘nalish:</b> ${escapeHtml(interestLabel(interest))}`,
     comment ? `<b>Izoh:</b> ${escapeHtml(comment)}` : null,
+    lang ? `<b>Sayt tili:</b> ${lang}` : null,
     '',
     `<i>${escapeHtml(time)}${page ? ` · ${escapeHtml(page.slice(0, 200))}` : ''}</i>`,
   ]

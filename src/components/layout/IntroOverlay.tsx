@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useI18n } from '../../i18n/context';
 import { forceMotion, markIntroSeen } from '../../lib/intro';
 
 // Only first-time visitors see the intro, so its code is loaded on demand.
@@ -14,6 +15,7 @@ interface IntroOverlayProps {
 }
 
 export default function IntroOverlay({ open, onClose }: IntroOverlayProps) {
+  const { t } = useI18n();
   useEffect(() => {
     if (!open) return undefined;
     markIntroSeen();
@@ -51,7 +53,7 @@ export default function IntroOverlay({ open, onClose }: IntroOverlayProps) {
             onClick={onClose}
             className="absolute right-4 bottom-6 inline-flex h-11 items-center gap-2 rounded-full bg-ink/90 px-5 text-sm font-semibold text-white transition-colors hover:bg-ink sm:right-8 sm:bottom-8"
           >
-            O‘tkazib yuborish
+            {t.intro.skip}
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
         </motion.div>

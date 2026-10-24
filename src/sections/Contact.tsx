@@ -2,22 +2,26 @@ import { lazy, Suspense, useEffect } from 'react';
 import ContactChannels from '../components/contact/ContactChannels';
 import Reveal from '../components/ui/Reveal';
 import { Section, SectionHeading } from '../components/ui/Section';
+import { useI18n } from '../i18n/context';
 
 // The form (react-hook-form + zod) is below the fold: load it separately, as soon as the browser is idle.
 const loadForm = () => import('../components/contact/ContactForm');
 const ContactForm = lazy(loadForm);
 
 function FormPlaceholder() {
+  const { t } = useI18n();
   return (
     <div
       aria-busy="true"
-      aria-label="Shakl yuklanmoqda"
+      aria-label={t.contact.loading}
       className="min-h-[41rem] animate-pulse rounded-[1.75rem] border border-white/10 bg-ink-soft"
     />
   );
 }
 
 export default function Contact() {
+  const { t } = useI18n();
+  const c = t.contact;
   useEffect(() => {
     const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
     idle(() => void loadForm());
@@ -35,12 +39,12 @@ export default function Contact() {
           <SectionHeading
             id="contact-title"
             tone="dark"
-            eyebrow="Aloqa"
-            title="Biz bilan bog‘laning"
-            lead="Hamkorlik, maydon taklifi yoki savollaringiz bo‘yicha so‘rov qoldiring."
+            eyebrow={c.eyebrow}
+            title={c.title}
+            lead={c.lead}
           />
           <Reveal delay={0.1} className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-7">
-            <p className="mb-5 text-sm font-semibold text-white/80">Rasmiy kontaktlar</p>
+            <p className="mb-5 text-sm font-semibold text-white/80">{c.official}</p>
             <ContactChannels tone="dark" />
           </Reveal>
         </div>

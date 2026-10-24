@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AlertCircle, ArrowRight, CheckCircle2, ChevronDown, Loader2 } from 'lucide-react';
 import { hasAnyContact } from '../../config/site';
 import { clearContactIntent, onContactIntent } from '../../lib/contactIntent';
-import { INTERESTS, leadSchema, type Lead, type LeadInput } from '../../lib/leadSchema';
+import { useI18n } from '../../i18n/context';
+import { INTERESTS, leadSchema, type Lead, type LeadInput, type ValidationCode } from '../../lib/leadSchema';
 import { formatUzPhone, PHONE_PREFIX } from '../../lib/phone';
 import { LeadSubmitError, submitLead, type LeadErrorReason } from '../../lib/submitLead';
 import { Button } from '../ui/Button';
@@ -16,14 +17,11 @@ type Status = { kind: 'idle' } | { kind: 'success' } | { kind: 'error'; reason: 
 
 const EMPTY: LeadInput = { name: '', phone: '', interest: '' as LeadInput['interest'], comment: '', website: '' };
 
-const ERROR_TEXT: Record<LeadErrorReason, string> = {
-  network: 'So‘rov yuborilmadi: internet aloqasini tekshirib, qayta urinib ko‘ring.',
-  invalid: 'So‘rov yuborilmadi: kiritilgan ma’lumotlarni tekshirib, qayta yuboring.',
-  'not-configured': 'So‘rovni hozircha yuborib bo‘lmadi. Iltimos, keyinroq qayta urinib ko‘ring.',
-  server: 'So‘rovni yuborishda xatolik yuz berdi. Iltimos, birozdan so‘ng qayta urinib ko‘ring.',
-};
-
 export default function ContactForm() {
+  const { t, lang } = useI18n();
+  const f = t.form;
+  // Zod messages are codes (see leadSchema); show them in the current language.
+  const msg = (code?: string) => (code ? (f.validation[code as ValidationCode] ?? code) : undefined);
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const {
     register,
@@ -50,7 +48,7 @@ export default function ContactForm() {
   const onSubmit = async (lead: Lead) => {
     setStatus({ kind: 'idle' });
     try {
-      await submitLead(lead);
+      await submitLead(lead, lang);
       setStatus({ kind: 'success' });
       clearContactIntent();
       reset(EMPTY);
@@ -79,12 +77,12 @@ export default function ContactForm() {
             <span className="grid h-16 w-16 place-items-center rounded-full bg-brand text-ink">
               <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
             </span>
-            <h3 className="mt-6 font-display text-2xl font-semibold">So‘rovingiz yuborildi</h3>
+            <h3 className="mt-6 font-display text-2xl font-semibold">{f.successTitle}</h3>
             <p className="mt-3 max-w-sm leading-relaxed text-white/65">
-              Rahmat! So‘rovingiz qabul qilindi. Ko‘rib chiqilgach, siz bilan bog‘lanamiz.
+              {f.successText}
             </p>
             <Button variant="outline-light" className="mt-8" onClick={() => setStatus({ kind: 'idle' })}>
-              Yana so‘rov yuborish
+              {f.again}
             </Button>
           </motion.div>
         ) : (
@@ -101,17 +99,17 @@ export default function ContactForm() {
           >
             <div>
               <h3 id="contact-form-title" className="font-display text-2xl font-semibold">
-                So‘rov qoldiring
+                {f.title}
               </h3>
-              <p className="mt-1.5 text-white/55">Barcha maydonlar, izohdan tashqari, to‘ldirilishi shart.</p>
+              <p className="mt-1.5 text-white/55">{f.subtitle}</p>
             </div>
 
-            <Field id="name" label="Ism" error={errors.name?.message}>
+            <Field id="name" label={f.name} error={msg(errors.name?.message)}>
               <input
                 id="name"
                 type="text"
                 autoComplete="name"
-                placeholder="Ismingiz"
+                placeholder={f.namePlaceholder}
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={describedBy('name')}
                 className={inputClasses(Boolean(errors.name)) + ' h-12'}
@@ -119,7 +117,7 @@ export default function ContactForm() {
               />
             </Field>
 
-            <Field id="phone" label="Telefon raqami" error={errors.phone?.message} hint="Masalan: +998 90 123 45 67">
+            <Field id="phone" label={f.phone} error={msg(errors.phone?.message)} hint={f.phoneHint}>
               <input
                 id="phone"
                 type="tel"
@@ -138,7 +136,7 @@ export default function ContactForm() {
               />
             </Field>
 
-            <Field id="interest" label="Qiziqish yo‘nalishi" error={errors.interest?.message}>
+            <Field id="interest" label={f.interest} error={msg(errors.interest?.message)}>
               <div className="relative">
                 <select
                   id="interest"
@@ -148,11 +146,11 @@ export default function ContactForm() {
                   {...register('interest')}
                 >
                   <option value="" disabled className="text-ink">
-                    Tanlang
+                    {f.choose}
                   </option>
                   {INTERESTS.map((i) => (
                     <option key={i.value} value={i.value} className="text-ink">
-                      {i.label}
+                      {f.interests[i.value]}
                     </option>
                   ))}
                 </select>
@@ -163,11 +161,11 @@ export default function ContactForm() {
               </div>
             </Field>
 
-            <Field id="comment" label="Izoh" optional error={errors.comment?.message}>
+            <Field id="comment" label={f.comment} optional error={msg(errors.comment?.message)}>
               <textarea
                 id="comment"
                 rows={4}
-                placeholder="Masalan: maydon joylashuvi yoki savolingiz"
+                placeholder={f.commentPlaceholder}
                 aria-invalid={Boolean(errors.comment)}
                 aria-describedby={describedBy('comment')}
                 className={inputClasses(Boolean(errors.comment)) + ' resize-y py-3'}
@@ -192,8 +190,8 @@ export default function ContactForm() {
                   <div role="alert" className="flex gap-3 rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-300">
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                     <p>
-                      {ERROR_TEXT[status.reason]}
-                      {hasAnyContact && ' Yoki rasmiy kontaktlarimiz orqali bevosita bog‘laning.'}
+                      {f.errors[status.reason]}
+                      {hasAnyContact && f.orContacts}
                       {import.meta.env.DEV && status.reason === 'not-configured' && (
                         <span className="mt-1 block text-xs opacity-80">
                           Dev: /api/lead javob bermadi — README’dagi “Arizalarni qabul qilishni ulash” bo‘limiga qarang.
@@ -216,10 +214,10 @@ export default function ContactForm() {
               {isSubmitting ? (
                 <span className="inline-flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                  Yuborilmoqda…
+                  {f.sending}
                 </span>
               ) : (
-                'So‘rov yuborish'
+                f.submit
               )}
             </Button>
           </motion.form>

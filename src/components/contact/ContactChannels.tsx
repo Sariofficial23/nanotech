@@ -1,4 +1,5 @@
 import { CONTACTS } from '../../config/site';
+import { useI18n } from '../../i18n/context';
 import { cn } from '../../lib/cn';
 import { CHANNEL_ICONS } from './channelIcons';
 
@@ -8,15 +9,10 @@ interface ContactChannelsProps {
   className?: string;
 }
 
-const ACTIONS = {
-  phone: 'Qo‘ng‘iroq qilish',
-  telegram: 'Telegram’da yozish',
-  'telegram-group': 'Guruhga qo‘shilish',
-  instagram: 'Instagram’ni ochish',
-} as const;
-
 /** Action links keep private-looking contact details out of the visible layout. */
 export default function ContactChannels({ tone = 'dark', compact = false, className }: ContactChannelsProps) {
+  const { t } = useI18n();
+  const ACTIONS = t.channels;
   const dark = tone === 'dark';
   return (
     <ul className={cn('grid grid-cols-2 gap-3', className)}>

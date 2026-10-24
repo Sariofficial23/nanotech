@@ -3,6 +3,7 @@ import { MotionConfig } from 'framer-motion';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import IntroOverlay from './components/layout/IntroOverlay';
+import { useI18n } from './i18n/context';
 import { shouldShowIntro } from './lib/intro';
 import InstalledWorks from './sections/InstalledWorks';
 import About from './sections/About';
@@ -16,6 +17,7 @@ import ScrollStory from './sections/ScrollStory';
 import Solutions from './sections/Solutions';
 
 export default function App() {
+  const { t } = useI18n();
   const [introOpen, setIntroOpen] = useState(shouldShowIntro);
   const closeIntro = useCallback(() => setIntroOpen(false), []);
 
@@ -25,7 +27,7 @@ export default function App() {
         href="#asosiy"
         className="sr-only z-[70] rounded-full bg-ink px-5 py-3 font-semibold text-white focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
       >
-        Asosiy mazmunga o‘tish
+        {t.header.skipToContent}
       </a>
       <Header />
       <main id="asosiy">

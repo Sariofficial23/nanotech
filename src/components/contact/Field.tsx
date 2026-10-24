@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useI18n } from '../../i18n/context';
 
 interface FieldProps {
   id: string;
@@ -10,11 +11,12 @@ interface FieldProps {
 }
 
 export default function Field({ id, label, optional, error, hint, children }: FieldProps) {
+  const { t } = useI18n();
   return (
     <div>
       <label htmlFor={id} className="mb-2 flex items-baseline justify-between text-sm font-semibold text-white">
         {label}
-        {optional && <span className="text-xs font-normal text-white/45">ixtiyoriy</span>}
+        {optional && <span className="text-xs font-normal text-white/45">{t.form.optional}</span>}
       </label>
       {children}
       {error ? (

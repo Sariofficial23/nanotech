@@ -5,25 +5,28 @@
 const env = (value: string | undefined) => value?.trim() || null;
 
 export const BRAND = {
-  /** Brand name in texts — matches the logo. */
+  /** Brand name in texts — matches the logo. All other copy lives in src/i18n. */
   name: 'NANOTEX',
   slogan: 'Sifat • Ishonch • Samaradorlik',
-  description:
-    'NANOTEX — shaharlar va avtomobil yo‘llari uchun ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga yo‘naltirilgan loyiha.',
 } as const;
 
-export const NAV_ITEMS = [
-  { id: 'bosh-sahifa', label: 'Bosh sahifa' },
-  { id: 'biz-haqimizda', label: 'Biz haqimizda' },
-  { id: 'yechimlar', label: 'Yechimlarimiz' },
-  { id: 'hamkorlik', label: 'Hamkorlik' },
-  { id: 'aloqa', label: 'Aloqa' },
-] as const;
+/** Section anchors shown in the menus; their labels come from i18n `nav`. */
+export const NAV_IDS = ['bosh-sahifa', 'biz-haqimizda', 'yechimlar', 'hamkorlik', 'aloqa'] as const;
+export type NavId = (typeof NAV_IDS)[number];
 
-export type SectionId = (typeof NAV_ITEMS)[number]['id'] | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'ishlarimiz';
+export type SectionId = NavId | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'ishlarimiz';
+
+// Official phone numbers shown under the phone button in the header (first one is also in Contacts).
+// VITE_CONTACT_PHONE may hold several numbers separated by commas.
+export const PHONES: string[] = (env(import.meta.env.VITE_CONTACT_PHONE) ?? '+998 98 274 05 05')
+  .split(',')
+  .map((p) => p.trim())
+  .filter(Boolean);
+
+export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;
 
 // Official contacts confirmed by the company; env variables can still override them.
-const phone = env(import.meta.env.VITE_CONTACT_PHONE) ?? '+998 98 274 05 05';
+const phone = PHONES[0] ?? null;
 const telegram = (env(import.meta.env.VITE_CONTACT_TELEGRAM) ?? 'kuchmaAZS').replace(/^@/, '');
 const instagram = (env(import.meta.env.VITE_CONTACT_INSTAGRAM) ?? 'nanotex_azs').replace(/^@/, '');
 
@@ -42,7 +45,7 @@ export const CONTACTS: ContactChannel[] = [
     label: 'Telefon',
     action: `Qo‘ng‘iroq qilish: ${phone}`,
     value: phone,
-    href: phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : null,
+    href: phone ? telHref(phone) : null,
   },
   {
     kind: 'telegram',

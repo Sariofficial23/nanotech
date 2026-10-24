@@ -10,20 +10,21 @@ import {
 } from 'framer-motion';
 import { ChevronsDown } from 'lucide-react';
 import StationScene from '../components/story/StationScene';
-import { STORY_STEPS, stepAt } from '../components/story/storyTimeline';
+import { stepAt } from '../components/story/storyTimeline';
+import { useI18n } from '../i18n/context';
 import { forceMotion } from '../lib/intro';
 
-const TITLE = 'Ko‘chma shoxobchada jarayon qanday ko‘rinadi?';
 
 function Heading() {
+  const { t } = useI18n();
   return (
     <div className="w-full max-w-6xl">
       <p className="mb-2 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-brand uppercase">
         <span aria-hidden="true" className="h-px w-8 bg-brand" />
-        Vizualizatsiya
+        {t.story.eyebrow}
       </p>
       <h2 id="story-title" className="font-display text-2xl leading-tight font-bold tracking-tight text-balance sm:text-4xl">
-        {TITLE}
+        {t.story.title}
       </h2>
     </div>
   );
@@ -31,6 +32,7 @@ function Heading() {
 
 /** Scroll-driven scene: the page scroll moves the cars in and out of the station. */
 function AnimatedStory({ zoom }: { zoom: boolean }) {
+  const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   // A light spring smooths out coarse mouse-wheel steps without lagging behind the scroll.
@@ -60,7 +62,7 @@ function AnimatedStory({ zoom }: { zoom: boolean }) {
           >
             <span className="inline-flex items-center gap-1.5 rounded-full bg-ink/75 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur sm:text-sm">
               <ChevronsDown className="h-4 w-4 animate-bounce text-brand" aria-hidden="true" />
-              Pastga aylantiring
+              {t.story.hint}
             </span>
           </motion.div>
         </div>
@@ -77,7 +79,7 @@ function AnimatedStory({ zoom }: { zoom: boolean }) {
                 className="flex items-center gap-3"
               >
                 <span className="font-display text-sm font-bold text-brand">{String(step + 1).padStart(2, '0')}</span>
-                {STORY_STEPS[step].text}
+                {t.story.steps[step]}
               </motion.p>
             </AnimatePresence>
           </div>
