@@ -6,7 +6,6 @@ import { useActiveSection } from '../../hooks/useActiveSection';
 import { useScrolled } from '../../hooks/useScrolled';
 import { cn } from '../../lib/cn';
 import Logo from '../brand/Logo';
-import SocialLinks from '../contact/SocialLinks';
 import { ButtonLink } from '../ui/Button';
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
@@ -75,8 +74,6 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Hidden only between lg and xl, where the full menu leaves no room for them. */}
-          <SocialLinks className="lg:hidden xl:flex" />
           <ButtonLink href="#aloqa" variant="primary" className="max-sm:hidden" icon={<ArrowRight className="h-4 w-4" />}>
             Bog‘lanish
           </ButtonLink>
