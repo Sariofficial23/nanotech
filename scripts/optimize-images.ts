@@ -54,8 +54,9 @@ for (const { stamp, name, dir } of SOURCES.filter((s) => !only || s.name.startsW
   const { width, height } = await input.metadata();
   for (const w of WIDTHS) {
     const resized = input.clone().resize({ width: Math.min(w, width ?? w) });
-    await resized.clone().avif({ quality: 55, effort: 6 }).toFile(join(outDir, `${name}-${w}.avif`));
-    await resized.clone().webp({ quality: 78 }).toFile(join(outDir, `${name}-${w}.webp`));
+    const slide = name.startsWith('slide-');
+    await resized.clone().avif({ quality: slide ? 68 : 55, effort: 6 }).toFile(join(outDir, `${name}-${w}.avif`));
+    await resized.clone().webp({ quality: slide ? 88 : 78 }).toFile(join(outDir, `${name}-${w}.webp`));
   }
   console.log(`${name}: ${width}×${height}`);
 

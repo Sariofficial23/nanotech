@@ -28,10 +28,8 @@ export default function Hero({ ready = true }: HeroProps) {
     <section
       id="bosh-sahifa"
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden bg-ink pt-18 text-white"
+      className="relative isolate overflow-hidden bg-ink pt-24 pb-16 text-white sm:pt-28 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-24 lg:pb-20"
     >
-      {/* First thing on screen: the stations in different places, swipeable. */}
-      <HeroSlider />
 
       {/* Background: slow-drifting brand glow + faint grid */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
@@ -41,7 +39,7 @@ export default function Hero({ ready = true }: HeroProps) {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.35fr_1fr] lg:gap-14 lg:px-8 lg:py-24">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:px-8">
         <div>
           <motion.p
             {...appear(0.05)}
@@ -73,10 +71,8 @@ export default function Hero({ ready = true }: HeroProps) {
               {h.leadMuted}
             </span>
           </motion.p>
-        </div>
 
-        <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur sm:p-8">
-          <motion.div {...appear(0.4)} className="flex flex-col gap-3">
+          <motion.div {...appear(0.4)} className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" onClick={() => requestContact()} icon={<ArrowRight className="h-4 w-4" />}>
               {h.ctaPrimary}
             </Button>
@@ -88,7 +84,7 @@ export default function Hero({ ready = true }: HeroProps) {
             {h.disclaimer}
           </motion.p>
 
-          <motion.ul {...appear(0.52)} className="mt-6 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-white/60">
+          <motion.ul {...appear(0.52)} className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/60">
             {h.highlights.map((label, i) => {
               const Icon = HIGHLIGHT_ICONS[i];
               return (
@@ -100,6 +96,16 @@ export default function Hero({ ready = true }: HeroProps) {
             })}
           </motion.ul>
         </div>
+
+        {/* Stations in different places (city, highway, mountains…), swipeable, next to the headline. */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97, y: 20 }}
+          animate={ready ? { opacity: 1, scale: 1, y: 0 } : undefined}
+          transition={{ duration: 0.9, delay: 0.2, ease }}
+          className="max-lg:order-first"
+        >
+          <HeroSlider />
+        </motion.div>
       </div>
     </section>
   );
