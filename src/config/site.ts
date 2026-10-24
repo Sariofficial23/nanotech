@@ -11,10 +11,10 @@ export const BRAND = {
 } as const;
 
 /** Section anchors shown in the menus; their labels come from i18n `nav`. */
-export const NAV_IDS = ['bosh-sahifa', 'biz-haqimizda', 'yechimlar', 'ishlarimiz', 'mahsulotlar', 'hamkorlik', 'aloqa'] as const;
+export const NAV_IDS = ['bosh-sahifa', 'biz-haqimizda', 'ishlarimiz', 'mahsulotlar', 'hamkorlik', 'aloqa'] as const;
 export type NavId = (typeof NAV_IDS)[number];
 
-export type SectionId = NavId | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'ishlarimiz';
+export type SectionId = NavId | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'yechimlar';
 
 // Official phone numbers shown under the phone button in the header (first one is also in Contacts).
 // VITE_CONTACT_PHONE may hold several numbers separated by commas.

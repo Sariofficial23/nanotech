@@ -15,7 +15,6 @@ import Hero from './sections/Hero';
 import Partnership from './sections/Partnership';
 import Process from './sections/Process';
 import ScrollStory from './sections/ScrollStory';
-import Solutions from './sections/Solutions';
 
 export default function App() {
   const { t } = useI18n();
@@ -36,7 +35,6 @@ export default function App() {
         <Directions />
         <ScrollStory />
         <About />
-        <Solutions />
         <InstalledWorks />
         <Products />
         <Process />
