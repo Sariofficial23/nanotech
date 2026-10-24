@@ -26,6 +26,21 @@ export const en: Dict = {
     skipToContent: 'Skip to main content',
   },
   intro: { skip: 'Skip' },
+  heroSlider: {
+    label: 'NANOTEX stations in different locations',
+    carouselRole: 'carousel',
+    slideRole: 'slide',
+    prev: 'Previous photo',
+    next: 'Next photo',
+    goTo: (n: number) => `Go to photo ${n}`,
+    slides: {
+      city: { caption: 'In the city', alt: 'NANOTEX mobile fuel station in the city (visualization)' },
+      highway: { caption: 'On the highway', alt: 'NANOTEX mobile fuel station on the highway (visualization)' },
+      mountains: { caption: 'In the mountains', alt: 'NANOTEX mobile fuel station in the mountains (visualization)' },
+      village: { caption: 'Near a village', alt: 'NANOTEX mobile fuel station near a village (visualization)' },
+      company: { caption: 'For your company', alt: 'NANOTEX mobile fuel station on company premises (visualization)' },
+    },
+  },
   hero: {
     badge: 'Mobile fuel station project',
     title: {

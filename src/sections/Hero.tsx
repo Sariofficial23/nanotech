@@ -3,7 +3,7 @@ import { ArrowDown, ArrowRight, MapPin, Route, Zap } from 'lucide-react';
 import { requestContact } from '../lib/contactIntent';
 import { Button, ButtonLink } from '../components/ui/Button';
 import CountUp from '../components/ui/CountUp';
-import Picture from '../components/ui/Picture';
+import HeroSlider from '../components/hero/HeroSlider';
 import { useI18n } from '../i18n/context';
 
 const HIGHLIGHT_ICONS = [Zap, MapPin, Route];
@@ -28,8 +28,11 @@ export default function Hero({ ready = true }: HeroProps) {
     <section
       id="bosh-sahifa"
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden bg-ink pt-28 pb-16 text-white sm:pt-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-24 lg:pb-20"
+      className="relative isolate overflow-hidden bg-ink pt-18 text-white"
     >
+      {/* First thing on screen: the stations in different places, swipeable. */}
+      <HeroSlider />
+
       {/* Background: slow-drifting brand glow + faint grid */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="bg-grid absolute inset-0 animate-grid [mask-image:radial-gradient(ellipse_at_70%_40%,black_20%,transparent_70%)]" />
@@ -38,7 +41,7 @@ export default function Hero({ ready = true }: HeroProps) {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:px-8">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.35fr_1fr] lg:gap-14 lg:px-8 lg:py-24">
         <div>
           <motion.p
             {...appear(0.05)}
@@ -70,8 +73,10 @@ export default function Hero({ ready = true }: HeroProps) {
               {h.leadMuted}
             </span>
           </motion.p>
+        </div>
 
-          <motion.div {...appear(0.4)} className="mt-9 flex flex-col gap-3 sm:flex-row">
+        <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur sm:p-8">
+          <motion.div {...appear(0.4)} className="flex flex-col gap-3">
             <Button size="lg" onClick={() => requestContact()} icon={<ArrowRight className="h-4 w-4" />}>
               {h.ctaPrimary}
             </Button>
@@ -83,7 +88,7 @@ export default function Hero({ ready = true }: HeroProps) {
             {h.disclaimer}
           </motion.p>
 
-          <motion.ul {...appear(0.52)} className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/60">
+          <motion.ul {...appear(0.52)} className="mt-6 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-white/60">
             {h.highlights.map((label, i) => {
               const Icon = HIGHLIGHT_ICONS[i];
               return (
@@ -95,24 +100,6 @@ export default function Hero({ ready = true }: HeroProps) {
             })}
           </motion.ul>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 24 }}
-          animate={ready ? { opacity: 1, scale: 1, y: 0 } : undefined}
-          transition={{ duration: 1, delay: 0.25, ease }}
-          className="relative"
-        >
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.35)] sm:p-3">
-            <Picture
-              name="station-sunset"
-              alt={h.photoAlt}
-              sizes="(min-width: 1024px) 46vw, 100vw"
-              priority
-              className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"
-            />
-          </div>
-          <p className="mt-3 text-center text-xs text-white/40">{h.visualization}</p>
-        </motion.div>
       </div>
     </section>
   );

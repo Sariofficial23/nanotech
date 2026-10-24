@@ -26,6 +26,21 @@ export const uz = {
     skipToContent: 'Asosiy mazmunga o‘tish',
   },
   intro: { skip: 'O‘tkazib yuborish' },
+  heroSlider: {
+    label: 'NANOTEX shoxobchalari turli joylarda',
+    carouselRole: 'karusel',
+    slideRole: 'slayd',
+    prev: 'Oldingi rasm',
+    next: 'Keyingi rasm',
+    goTo: (n: number) => `${n}-rasmga o‘tish`,
+    slides: {
+      city: { caption: 'Shaharda', alt: 'Shahar ichidagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },
+      highway: { caption: 'Trassa bo‘yida', alt: 'Trassa bo‘yidagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },
+      mountains: { caption: 'Tog‘larda', alt: 'Tog‘li hududdagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },
+      village: { caption: 'Shaharcha yaqinida', alt: 'Shaharcha yaqinidagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },
+      company: { caption: 'Korxonangiz uchun', alt: 'Korxona hududidagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },
+    },
+  },
   hero: {
     badge: 'Ko‘chma AYoQSh loyihasi',
     title: {

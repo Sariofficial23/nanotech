@@ -26,6 +26,21 @@ export const ru: Dict = {
     skipToContent: 'Перейти к основному содержимому',
   },
   intro: { skip: 'Пропустить' },
+  heroSlider: {
+    label: 'Станции NANOTEX в разных местах',
+    carouselRole: 'карусель',
+    slideRole: 'слайд',
+    prev: 'Предыдущее фото',
+    next: 'Следующее фото',
+    goTo: (n: number) => `Перейти к фото ${n}`,
+    slides: {
+      city: { caption: 'В городе', alt: 'Мобильная АЗС NANOTEX в городе (визуализация)' },
+      highway: { caption: 'На трассе', alt: 'Мобильная АЗС NANOTEX на трассе (визуализация)' },
+      mountains: { caption: 'В горах', alt: 'Мобильная АЗС NANOTEX в горах (визуализация)' },
+      village: { caption: 'Рядом с посёлком', alt: 'Мобильная АЗС NANOTEX рядом с посёлком (визуализация)' },
+      company: { caption: 'Для вашей компании', alt: 'Мобильная АЗС NANOTEX на территории компании (визуализация)' },
+    },
+  },
   hero: {
     badge: 'Проект мобильных АЗС',
     title: {
