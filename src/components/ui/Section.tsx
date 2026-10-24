@@ -18,17 +18,19 @@ interface SectionProps {
   tone?: Tone;
   className?: string;
   labelledBy?: string;
+  /** Wider container (same width as the hero) for sections with a large photo. */
+  wide?: boolean;
   children: ReactNode;
 }
 
-export function Section({ id, tone = 'dark', className, labelledBy, children }: SectionProps) {
+export function Section({ id, tone = 'dark', className, labelledBy, wide = false, children }: SectionProps) {
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
       className={cn('relative isolate overflow-hidden py-20 sm:py-24 lg:py-32', TONES[tone], className)}
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
+      <div className={cn('mx-auto w-full px-4 sm:px-6 lg:px-8', wide ? 'max-w-[96rem]' : 'max-w-7xl')}>{children}</div>
     </section>
   );
 }

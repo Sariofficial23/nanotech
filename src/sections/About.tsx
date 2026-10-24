@@ -11,8 +11,8 @@ export default function About() {
   const { t } = useI18n();
   const a = t.about;
   return (
-    <Section id="biz-haqimizda" tone="soft" labelledBy="about-title">
-      <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+    <Section id="biz-haqimizda" tone="soft" labelledBy="about-title" wide>
+      <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
         <div>
           <SectionHeading
             id="about-title"
@@ -45,7 +45,7 @@ export default function About() {
             <Picture
               name="station-highway"
               alt={a.photoAlt}
-              sizes="(min-width: 1024px) 46vw, 100vw"
+              sizes="(min-width: 1024px) 60vw, 100vw"
               className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"
             />
           </div>
