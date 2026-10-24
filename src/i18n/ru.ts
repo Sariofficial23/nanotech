@@ -285,6 +285,7 @@ export const ru: Dict = {
       tadbirkor: 'Я предприниматель',
       investor: 'Я инвестор',
       kompaniya: 'Я представитель компании',
+      mahsulotlar: 'Продукты',
       boshqa: 'Другой вопрос',
     },
     validation: {

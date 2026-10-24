@@ -284,6 +284,7 @@ export const en: Dict = {
       tadbirkor: 'I’m an entrepreneur',
       investor: 'I’m an investor',
       kompaniya: 'I represent a company',
+      mahsulotlar: 'Products',
       boshqa: 'Other question',
     },
     validation: {

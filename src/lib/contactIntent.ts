@@ -31,7 +31,7 @@ const PRODUCT_EVENT = 'nanotex:product-intent';
 export function requestProductContact(name: string) {
   productPending = name;
   window.dispatchEvent(new CustomEvent<string>(PRODUCT_EVENT, { detail: name }));
-  requestContact('kompaniya');
+  requestContact('mahsulotlar');
 }
 export function onProductContact(handler: (name: string) => void) {
   if (productPending) handler(productPending);

@@ -285,6 +285,7 @@ export const uz = {
       tadbirkor: 'Tadbirkorman',
       investor: 'Investorman',
       kompaniya: 'Kompaniya vakiliman',
+      mahsulotlar: 'Mahsulotlar',
       boshqa: 'Boshqa savol',
     },
     validation: {
