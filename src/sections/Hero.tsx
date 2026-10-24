@@ -39,7 +39,7 @@ export default function Hero({ ready = true }: HeroProps) {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:px-8">
+      <div className="mx-auto grid w-full max-w-[96rem] items-center gap-10 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:gap-10 lg:px-8">
         <div>
           <motion.p
             {...appear(0.05)}
@@ -53,7 +53,7 @@ export default function Hero({ ready = true }: HeroProps) {
             id="hero-title"
             {...appear(0.15)}
             aria-label={h.title.aria}
-            className="font-display text-[2.4rem] leading-[1.04] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.2rem]"
+            className="font-display text-[2.4rem] leading-[1.04] font-bold tracking-tight text-balance sm:text-6xl lg:text-[3rem] xl:text-[3.6rem]"
           >
             <span aria-hidden="true">
               {h.title.before}{' '}

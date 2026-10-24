@@ -135,14 +135,14 @@ export default function HeroSlider() {
               alt={s.slides[slide.key].alt}
               width={1704}
               height={923}
-              sizes="(min-width: 1024px) 46vw, 100vw"
+              sizes="(min-width: 1024px) 62vw, 100vw"
               priority={i === 0}
               className="pointer-events-none block aspect-[16/10] w-full object-cover object-left sm:aspect-[1704/923] sm:object-center"
             />
             {slide.overlay && (
               <div className="pointer-events-none absolute top-[8%] left-[3.5%] max-w-[60%]" aria-hidden="true">
                 <p className="font-display text-[clamp(0.5rem,0.8vw,0.75rem)] font-black tracking-[0.2em] text-brand italic [text-shadow:0_2px_12px_rgb(0_0_0/0.6)]">NANOTEX</p>
-                <p className="font-display text-[clamp(1.1rem,2.6vw,2.4rem)] leading-[0.95] font-black text-white uppercase [text-shadow:0_4px_24px_rgb(0_0_0/0.45)]">
+                <p className="font-display text-[clamp(1.1rem,3vw,2.9rem)] leading-[0.95] font-black text-white uppercase [text-shadow:0_4px_24px_rgb(0_0_0/0.45)]">
                   {s.slides[slide.key].caption}
                 </p>
                 <span className="mt-[0.6vw] block h-[0.45vw] min-h-1 w-[9%] min-w-8 bg-brand" />
