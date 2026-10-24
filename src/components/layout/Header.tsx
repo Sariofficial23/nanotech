@@ -40,7 +40,7 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-        <a href="#bosh-sahifa" className="rounded-lg" aria-label="NanoTech — bosh sahifa" onClick={() => setOpen(false)}>
+        <a href="#bosh-sahifa" className="rounded-lg" aria-label="NANOTEX — bosh sahifa" onClick={() => setOpen(false)}>
           <Logo tone="dark" />
         </a>
 

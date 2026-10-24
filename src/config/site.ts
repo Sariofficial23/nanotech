@@ -5,11 +5,11 @@
 const env = (value: string | undefined) => value?.trim() || null;
 
 export const BRAND = {
-  /** Name used in texts. The logo artwork itself reads "NANOTEX". */
-  name: 'NanoTech',
+  /** Brand name in texts — matches the logo. */
+  name: 'NANOTEX',
   slogan: 'Sifat • Ishonch • Samaradorlik',
   description:
-    'NanoTech — shaharlar va avtomobil yo‘llari uchun ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga yo‘naltirilgan loyiha.',
+    'NANOTEX — shaharlar va avtomobil yo‘llari uchun ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga yo‘naltirilgan loyiha.',
 } as const;
 
 export const NAV_ITEMS = [

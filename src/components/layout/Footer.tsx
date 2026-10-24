@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-[#0b0b0b] text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
         <div>
-          <a href="#bosh-sahifa" aria-label="NanoTech — bosh sahifa" className="inline-block rounded-lg">
+          <a href="#bosh-sahifa" aria-label="NANOTEX — bosh sahifa" className="inline-block rounded-lg">
             <Logo tone="dark" />
           </a>
           <p className="mt-5 max-w-sm leading-relaxed text-white/60">{BRAND.description}</p>

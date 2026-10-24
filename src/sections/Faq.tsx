@@ -4,9 +4,9 @@ import { Section, SectionHeading } from '../components/ui/Section';
 
 const FAQ: AccordionItem[] = [
   {
-    question: 'NanoTech nima bilan shug‘ullanadi?',
+    question: 'NANOTEX nima bilan shug‘ullanadi?',
     answer:
-      'NanoTech — ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llari uchun zamonaviy yechimlarni rivojlantirishga intilamiz.',
+      'NANOTEX — ko‘chma yoqilg‘i quyish shoxobchalarini yaratish va rivojlantirishga qaratilgan loyiha. Biz shaharlar va avtomobil yo‘llari uchun zamonaviy yechimlarni rivojlantirishga intilamiz.',
   },
   {
     question: 'Ko‘chma AYoQSh qayerda joylashtirilishi mumkin?',

@@ -68,7 +68,7 @@ export default function Hero({ ready = true }: HeroProps) {
           <motion.p {...appear(0.28)} className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty sm:text-xl">
             Hamkorlarimizdan ayrimlari ilk oylardanoq oyiga $5 000 dan ortiq daromad qilmoqda.{' '}
             <span className="text-white/60">
-              NanoTech — yoqilg‘i quyishning yangi formati: shaharlar va avtomobil yo‘llari uchun ko‘chma shoxobchalar.
+              NANOTEX — yoqilg‘i quyishning yangi formati: shaharlar va avtomobil yo‘llari uchun ko‘chma shoxobchalar.
             </span>
           </motion.p>
 
@@ -103,7 +103,7 @@ export default function Hero({ ready = true }: HeroProps) {
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_40px_120px_-40px_rgb(255_196_0/0.35)] sm:p-3">
             <Picture
               name="station-sunset"
-              alt="NanoTech ko‘chma yoqilg‘i quyish shoxobchasi quyosh botishida (vizualizatsiya)"
+              alt="NANOTEX ko‘chma yoqilg‘i quyish shoxobchasi quyosh botishida (vizualizatsiya)"
               sizes="(min-width: 1024px) 46vw, 100vw"
               priority
               className="block aspect-[1672/941] h-auto w-full rounded-[1.5rem] object-cover"

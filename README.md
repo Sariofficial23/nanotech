@@ -1,4 +1,4 @@
-# NanoTech — korporativ sayt
+# NANOTEX — korporativ sayt
 
 Ko‘chma yoqilg‘i quyish shoxobchalari loyihasi uchun bir sahifali korporativ sayt.
 Stack: React 19 + TypeScript + Vite 8, Tailwind CSS 4, Framer Motion, Lucide, React Hook Form + Zod.

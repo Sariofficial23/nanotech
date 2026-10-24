@@ -21,14 +21,14 @@ export default function StationScene({ progress, zoom = true, className }: Stati
       <motion.div style={{ scale }} className="absolute inset-0 origin-[70%_70%]">
         <Picture
           name="station-arrive"
-          alt="Avtomobil NanoTech shoxobchasiga yaqinlashmoqda (vizualizatsiya)"
+          alt="Avtomobil NANOTEX shoxobchasiga yaqinlashmoqda (vizualizatsiya)"
           sizes={SIZES}
           className="absolute inset-0 h-full w-full object-cover"
         />
         <motion.div style={{ opacity: refuel }} className="absolute inset-0">
           <Picture
             name="station-refuel"
-            alt="NanoTech shoxobchasida avtomobilga yoqilg‘i quyilmoqda (vizualizatsiya)"
+            alt="NANOTEX shoxobchasida avtomobilga yoqilg‘i quyilmoqda (vizualizatsiya)"
             sizes={SIZES}
             className="h-full w-full object-cover"
           />

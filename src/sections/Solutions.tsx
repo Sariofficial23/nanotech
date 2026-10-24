@@ -16,7 +16,7 @@ const SOLUTIONS: Solution[] = [
   {
     icon: Fuel,
     title: 'Ko‘chma AYoQSh',
-    text: 'Kichik maydonga moslashtirilgan zamonaviy yoqilg‘i quyish shoxobchasi formati. NanoTech aynan shu formatni rivojlantirishga yo‘naltirilgan.',
+    text: 'Kichik maydonga moslashtirilgan zamonaviy yoqilg‘i quyish shoxobchasi formati. NANOTEX aynan shu formatni rivojlantirishga yo‘naltirilgan.',
     featured: true,
   },
   {
