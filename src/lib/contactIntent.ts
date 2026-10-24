@@ -23,4 +23,19 @@ export function onContactIntent(handler: (interest: Interest) => void) {
 
 export function clearContactIntent() {
   pending = null;
+  productPending = null;
+}
+
+let productPending: string | null = null;
+const PRODUCT_EVENT = 'nanotex:product-intent';
+export function requestProductContact(name: string) {
+  productPending = name;
+  window.dispatchEvent(new CustomEvent<string>(PRODUCT_EVENT, { detail: name }));
+  requestContact('kompaniya');
+}
+export function onProductContact(handler: (name: string) => void) {
+  if (productPending) handler(productPending);
+  const listener = (event: Event) => handler((event as CustomEvent<string>).detail);
+  window.addEventListener(PRODUCT_EVENT, listener);
+  return () => window.removeEventListener(PRODUCT_EVENT, listener);
 }

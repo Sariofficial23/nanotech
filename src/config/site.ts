@@ -11,7 +11,7 @@ export const BRAND = {
 } as const;
 
 /** Section anchors shown in the menus; their labels come from i18n `nav`. */
-export const NAV_IDS = ['bosh-sahifa', 'biz-haqimizda', 'yechimlar', 'hamkorlik', 'aloqa'] as const;
+export const NAV_IDS = ['bosh-sahifa', 'biz-haqimizda', 'yechimlar', 'ishlarimiz', 'mahsulotlar', 'hamkorlik', 'aloqa'] as const;
 export type NavId = (typeof NAV_IDS)[number];
 
 export type SectionId = NavId | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'ishlarimiz';

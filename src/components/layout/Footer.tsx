@@ -31,11 +31,6 @@ export default function Footer() {
               </li>
             ))}
             <li>
-              <a href="#ishlarimiz" className={LINK}>
-                {f.works}
-              </a>
-            </li>
-            <li>
               <a href="#savol-javob" className={LINK}>
                 {f.faq}
               </a>

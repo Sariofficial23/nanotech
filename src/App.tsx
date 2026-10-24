@@ -5,6 +5,7 @@ import Header from './components/layout/Header';
 import IntroOverlay from './components/layout/IntroOverlay';
 import { useI18n } from './i18n/context';
 import { shouldShowIntro } from './lib/intro';
+import Products from './sections/Products';
 import InstalledWorks from './sections/InstalledWorks';
 import About from './sections/About';
 import Contact from './sections/Contact';
@@ -37,6 +38,7 @@ export default function App() {
         <About />
         <Solutions />
         <InstalledWorks />
+        <Products />
         <Process />
         <Partnership />
         <Faq />

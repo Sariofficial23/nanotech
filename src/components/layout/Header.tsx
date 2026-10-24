@@ -24,7 +24,7 @@ export default function Header() {
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
-    const onResize = () => window.innerWidth >= 1024 && setOpen(false);
+    const onResize = () => window.innerWidth >= 1280 && setOpen(false);
     document.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
     document.documentElement.style.overflow = 'hidden';
@@ -47,7 +47,7 @@ export default function Header() {
           <Logo tone="dark" />
         </a>
 
-        <nav aria-label={t.header.mainMenu} className="hidden lg:block">
+        <nav aria-label={t.header.mainMenu} className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {NAV_IDS.map((id) => {
               const isActive = active === id;
@@ -57,7 +57,7 @@ export default function Header() {
                     href={`#${id}`}
                     aria-current={isActive ? 'true' : undefined}
                     className={cn(
-                      'relative rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors',
+                      'relative rounded-full px-2.5 py-2 text-[0.85rem] font-medium transition-colors',
                       'text-white/70 hover:text-white',
                       isActive && 'text-white',
                     )}
@@ -83,7 +83,7 @@ export default function Header() {
           <button
             type="button"
             className={cn(
-              'grid h-11 w-11 place-items-center rounded-full border transition-colors lg:hidden',
+              'grid h-11 w-11 place-items-center rounded-full border transition-colors xl:hidden',
               'border-white/20 bg-white/5 text-white hover:bg-white/10',
             )}
             aria-expanded={open}
@@ -114,7 +114,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/10 bg-ink text-white lg:hidden"
+            className="h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/10 bg-ink text-white xl:hidden"
           >
             <nav aria-label={t.header.mobileMenu} className="px-4 pt-4 pb-8 sm:px-6">
               <ul className="divide-y divide-white/10">

@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AlertCircle, ArrowRight, CheckCircle2, ChevronDown, Loader2 } from 'lucide-react';
 import { hasAnyContact } from '../../config/site';
-import { clearContactIntent, onContactIntent } from '../../lib/contactIntent';
+import { clearContactIntent, onContactIntent, onProductContact } from '../../lib/contactIntent';
 import { useI18n } from '../../i18n/context';
 import { INTERESTS, leadSchema, type Lead, type LeadInput, type ValidationCode } from '../../lib/leadSchema';
 import { formatUzPhone, PHONE_PREFIX } from '../../lib/phone';
@@ -44,6 +44,10 @@ export default function ContactForm() {
       }),
     [setValue],
   );
+
+  useEffect(() => onProductContact((name) => {
+    setValue('comment', name, { shouldValidate: true });
+  }), [setValue]);
 
   const onSubmit = async (lead: Lead) => {
     setStatus({ kind: 'idle' });
