@@ -6,6 +6,7 @@ import IntroOverlay from './components/layout/IntroOverlay';
 import { useI18n } from './i18n/context';
 import { shouldShowIntro } from './lib/intro';
 import Products from './sections/Products';
+import Location from './sections/Location';
 import InstalledWorks from './sections/InstalledWorks';
 import About from './sections/About';
 import Contact from './sections/Contact';
@@ -41,6 +42,7 @@ export default function App() {
         <Partnership />
         <Faq />
         <Contact />
+        <Location />
       </main>
       <Footer />
       <IntroOverlay open={introOpen} onClose={closeIntro} />

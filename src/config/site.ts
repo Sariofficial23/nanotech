@@ -16,17 +16,19 @@ export type NavId = (typeof NAV_IDS)[number];
 
 export type SectionId = NavId | 'yonalishlar' | 'shoxobcha' | 'jarayon' | 'savol-javob' | 'yechimlar';
 
-// Official phone numbers shown under the phone button in the header (first one is also in Contacts).
-// VITE_CONTACT_PHONE may hold several numbers separated by commas.
-export const PHONES: string[] = (env(import.meta.env.VITE_CONTACT_PHONE) ?? '+998 98 274 05 05')
-  .split(',')
-  .map((p) => p.trim())
-  .filter(Boolean);
+// Official numbers confirmed by the company, shared by every contact block.
+export const PHONES = ['+998 90 299 79 96', '+998 98 274 05 05'] as const;
+
+export const LOCATION = {
+  latitude: 39.74082,
+  longitude: 64.457152,
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=39.74082,64.457152',
+  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=39.74082,64.457152',
+} as const;
 
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;
 
 // Official contacts confirmed by the company; env variables can still override them.
-const phone = PHONES[0] ?? null;
 const telegram = (env(import.meta.env.VITE_CONTACT_TELEGRAM) ?? 'kuchmaAZS').replace(/^@/, '');
 const instagram = (env(import.meta.env.VITE_CONTACT_INSTAGRAM) ?? 'nanotex_azs').replace(/^@/, '');
 
@@ -40,13 +42,13 @@ export interface ContactChannel {
 }
 
 export const CONTACTS: ContactChannel[] = [
-  {
+  ...PHONES.map((phone): ContactChannel => ({
     kind: 'phone',
     label: 'Telefon',
     action: `Qo‘ng‘iroq qilish: ${phone}`,
     value: phone,
     href: phone ? telHref(phone) : null,
-  },
+  })),
   {
     kind: 'telegram',
     label: 'Telegram',

@@ -9,7 +9,7 @@ interface ContactChannelsProps {
   className?: string;
 }
 
-/** Action links keep private-looking contact details out of the visible layout. */
+/** Official phone numbers and social contact links. */
 export default function ContactChannels({ tone = 'dark', compact = false, className }: ContactChannelsProps) {
   const { t } = useI18n();
   const ACTIONS = t.channels;
@@ -19,10 +19,10 @@ export default function ContactChannels({ tone = 'dark', compact = false, classN
       {CONTACTS.filter((channel) => channel.href).map((channel) => {
         const Icon = CHANNEL_ICONS[channel.kind];
         return (
-          <li key={channel.kind} className="min-w-0">
+          <li key={channel.href} className="min-w-0">
             <a
               href={channel.href!}
-              aria-label={ACTIONS[channel.kind]}
+              aria-label={channel.kind === 'phone' ? `${ACTIONS.phone}: ${channel.value}` : ACTIONS[channel.kind]}
               target={channel.kind === 'phone' ? undefined : '_blank'}
               rel={channel.kind === 'phone' ? undefined : 'noopener noreferrer'}
               className={cn(
@@ -34,7 +34,7 @@ export default function ContactChannels({ tone = 'dark', compact = false, classN
                 <Icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className={cn('font-medium leading-snug', compact ? 'text-xs' : 'text-sm')}>
-                {ACTIONS[channel.kind]}
+                {channel.kind === 'phone' ? channel.value : ACTIONS[channel.kind]}
               </span>
             </a>
           </li>
