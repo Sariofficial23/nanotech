@@ -1,3 +1,5 @@
+import type { ReactEventHandler } from 'react';
+
 interface PictureProps {
   /** File name without size/extension, e.g. "station-front" → /images/station-front-1600.avif */
   name: string;
@@ -8,13 +10,16 @@ interface PictureProps {
   priority?: boolean;
   width?: number;
   height?: number;
+  /** Load now (e.g. the next carousel slide) without bumping fetch priority. */
+  eager?: boolean;
+  onLoad?: ReactEventHandler<HTMLImageElement>;
 }
 
 const path = (name: string, width: number, ext: string) => `/images/${name}-${width}.${ext}`;
 const srcSet = (name: string, ext: string) => `${path(name, 800, ext)} 800w, ${path(name, 1600, ext)} 1600w`;
 
 /** Responsive image: AVIF → WebP, 800/1600 px. width/height reserve space so the layout never jumps. */
-export default function Picture({ name, alt, sizes, className, priority = false, width = 1672, height = 941 }: PictureProps) {
+export default function Picture({ name, alt, sizes, className, priority = false, width = 1672, height = 941, eager = false, onLoad }: PictureProps) {
   return (
     <picture>
       <source type="image/avif" srcSet={srcSet(name, 'avif')} sizes={sizes} />
@@ -25,7 +30,8 @@ export default function Picture({ name, alt, sizes, className, priority = false,
         width={width}
         height={height}
         sizes={sizes}
-        loading={priority ? 'eager' : 'lazy'}
+        loading={priority || eager ? 'eager' : 'lazy'}
+        onLoad={onLoad}
         decoding="async"
         fetchPriority={priority ? 'high' : 'auto'}
         className={className}

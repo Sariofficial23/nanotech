@@ -35,6 +35,8 @@ export const uz = {
     prev: 'Oldingi rasm',
     next: 'Keyingi rasm',
     goTo: (n: number) => `${n}-rasmga o‘tish`,
+    pause: 'Avtomatik aylantirishni to‘xtatish',
+    play: 'Avtomatik aylantirishni yoqish',
     slides: {
       city: { caption: 'Shaharda', alt: 'Shahar ichidagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },
       highway: { caption: 'Trassa bo‘yida', alt: 'Trassa bo‘yidagi NANOTEX ko‘chma AYoQSh (vizualizatsiya)' },

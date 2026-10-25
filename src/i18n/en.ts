@@ -35,6 +35,8 @@ export const en: Dict = {
     prev: 'Previous photo',
     next: 'Next photo',
     goTo: (n: number) => `Go to photo ${n}`,
+    pause: 'Pause slideshow',
+    play: 'Play slideshow',
     slides: {
       city: { caption: 'In the city', alt: 'NANOTEX mobile fuel station in the city (visualization)' },
       highway: { caption: 'On the highway', alt: 'NANOTEX mobile fuel station on the highway (visualization)' },
